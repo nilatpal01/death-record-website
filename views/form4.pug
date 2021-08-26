@@ -1,0 +1,40 @@
+extends base
+
+block content 
+    main.main
+        .card-container
+            each form in forms
+                .card 
+                    .card__header 
+                        .card__picture
+                            .card__picture-overlay &nbsp;
+                            img.card__picture-img(src='img/form-bg.jpg' alt='form-bg')
+                        h3.heading-tertirary
+                            span=form.nameOftheDeceased
+                    .card__details 
+                        h4.card__sub-heading=form.hospitalName
+                        .card__data 
+                            svg.card__icon 
+                                use(xlink:href='img/icons.svg#icon-map-pin') 
+                            span=form.hospitalLocation
+                        .card__data 
+                            svg.card__icon 
+                                use(xlink:href='img/icons.svg#icon-calendar')
+                            span=form.deathDate.toLocaleString('en-us', {month:'long', year: 'numeric'})
+                        .card__data 
+                            svg.card__icon 
+                                use(xlink:href='img/icons.svg#icon-info')
+                            span=form.mannerOfDeath
+                        .card__data 
+                            svg.card__icon 
+                                use(xlink:href='img/icons.svg#icon-tag')
+                            span=form.causeOfDeath.toUpperCase()
+                    .card__footer
+                        p
+                            svg.card__icon 
+                                use(xlink:href='img/icons.svg#icon-user')
+                                |  
+                            span.card__footer-value= ` ${form.age} YEARS `
+                                |  
+                            span.card__footer-text= form.sex.toUpperCase()
+                        a.btn.btn--green.btn--small(href=`form4/${form._id}`) Details              

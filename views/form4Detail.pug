@@ -8,23 +8,22 @@ mixin overviewBox(label,text,icon)
         span.overview-box__text= text
 
 block content
-    section.section--header 
+    section.section-header 
         .header__hero 
-            .header__hero-overlay &nbsp;
             h1.heading-primary
                 span.hero-text= 'Form no. 4' 
-                br
-                span.hero-text= '(See Rule no. 7)'
-                br
-                span.hero-text= 'Medical Certificate of cause of Death'
-            p.hero-para='(hospital in patient not to be used for stillbirths)'
-            p.hero-para='To be sent to Registrar along with Form no.2 (Death Report)'
-            h2.heading-secondary.heading-margin=`Name of the hospital : ${form.hospitalName}`
-            p.heading-para=`I hereby certify that person whose particulars are given below died in the hospital in ward no ${form.wardNo} on ${form.deathDate.toLocaleString('en-us', {month:'long', year: 'numeric'})} at ${form.deathDate.getHours()} hours ${form.deathDate.getMinutes()} minutes and ${form.deathDate.getSeconds()} seconds`
+                //br
+                //span.hero-text= '(See Rule no. 7)'
+                //br
+                //span.hero-text= 'Medical Certificate of cause of Death'
+            //p.hero-para='(hospital in patient not to be used for stillbirths)'
+            //p.hero-para='To be sent to Registrar along with Form no.2 (Death Report)'
+ 
     section.section-description 
         .overview-box 
             div
                 .overview-box__group
+                    h2.heading-secondary.ma-bt-lg=`Name of the Hospital : ${form.hospitalName}`
                     h2.heading-secondary.ma-bt-lg=`Name of Deceased : ${form.nameOftheDeceased}`
 
                     +overviewBox('Sex', form.sex , 'user' )
@@ -45,17 +44,17 @@ block content
             if typeof  form.howInjuryOccured!=='undefined' 
                 +overviewBox('Reason', `${form.howInjuryOccured}`, 'activity')
             +overviewBox('Manner of Death', `${form.mannerOfDeath}`, 'star')
-            svg.overview-box__icon
-                use(xlink:href=`/img/icons.svg#icon-alert-circle`)
-            h3.heading-tertirary.ma-bt-lg='If deceased was a female, was pregnency the death associated with it ?'
+            h3.heading-tertirary.ma-bt-lg.heading-female='If deceased was a female, was pregnency the death associated with it ?'
             -if(form.isFemale === true) 
                 +overviewBox('Pregnent', 'YES', 'activity')  
             -if(form.isFemale === false)            
                 +overviewBox('Pregnent', 'NO', 'activity')
-            svg.overview-box__icon
-                use(xlink:href=`/img/icons.svg#icon-alert-circle`)
-                h3.heading-tertirary.ma-bt-lg='If yes, was there a delivery?'
+            h3.heading-tertirary.ma-bt-lg.heading-female='If yes, was there a delivery?'
             -if(form.isDelivery === true) 
                 +overviewBox('Delivery', 'YES', 'activity')  
             -if(form.isDelivery === false)            
                 +overviewBox('Delivery', 'NO', 'activity')
+
+    section.section--end 
+        a.btn.btn--green.btn--small.btn--end(href=`#`) Accept
+        a.btn.btn--green.btn--small.btn--end(href=`#`) Reject

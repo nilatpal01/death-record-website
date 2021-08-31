@@ -16,7 +16,7 @@ exports.getForm4=catchAsync(async(req,res,next)=>{
 
     //3)Render that template using form data from 1
     res.status(200).render('form4',{
-        title:'All forms 4',
+        title:'Non verified forms',
         forms
     })
 });
@@ -46,3 +46,16 @@ exports.getForm4a=catchAsync(async(req,res,next)=>{
         forms
     })
 });
+
+exports.getLoginForm = catchAsync(async (req, res) => {
+    res
+      .status(200)
+      .set(
+        'Content-Security-Policy',
+        "script-src 'self' https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js 'unsafe-inline' 'unsafe-eval';"
+      )
+      .render('login', {
+        title: 'Login to your account',
+      });
+  });
+//.set("Content-Security-Policy", "connect-src 'self' https://cdnjs.cloudflare.com")

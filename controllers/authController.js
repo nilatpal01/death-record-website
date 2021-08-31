@@ -71,7 +71,8 @@ exports.protect=catchAsync(async(req,res,next)=>{
     let token;
     if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
     token=req.headers.authorization.split(' ')[1];
-    }
+    }else if(req.cookies.jwt)
+    token=req.cookies.jwt
     if(!token){
         return next(new AppError('You are not logged in! please login to get access',401));
     }
@@ -179,3 +180,26 @@ exports.updatePassword=catchAsync(async(req,res,next)=>{
     //4)Log user in,send JWT
     createSendToken(user,200,res);
 });
+
+//Only for rendered pages, no errors
+exports.isLoggedIn=catchAsync(async(req,res,next)=>{
+
+    if(req.cookies.jwt){
+    //1)verify token
+        const decoded=await promisify(jwt.verify)(req.cookies.jwt,process.env.JWT_SECRET);
+    //2)Check if user still exits
+    const currentUser=await User.findById(decoded.id);
+    if(!currentUser){
+        return next();
+    }
+    //3)Check if user recently changed password after the token was issued
+    if(currentUser.changedPasswordAfter(decoded.iat)){
+        return next();
+    }
+
+    //THERE IS A LOGGED IN USER
+    res.locals.user=currentUser;
+    return next();
+    }
+next();
+})

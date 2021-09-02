@@ -4,16 +4,12 @@ const authController=require('../controllers/authController');
 
 const router=express.Router();
 
-router.get('/',viewController.getOverview);
+router.get('/',authController.isLoggedIn,viewController.getOverview);
+router.get('/form4',authController.protect,viewController.getForm4);
+router.get('/form4/:id',authController.isLoggedIn,viewController.getOneForm4);
+router.get('/form4a',authController.isLoggedIn,viewController.getForm4a);
+router.get('/login',authController.isLoggedIn,viewController.getLoginForm);
+router.get('/me', authController.protect,viewController.getAccount);
 
-//router.use(authController.isLoggedIn);
-
-router.get('/form4',viewController.getForm4);
-router.get('/form4/:id',viewController.getOneForm4);
-
-router.get('/form4a',viewController.getForm4a);
-
-
-router.get('/login',viewController.getLoginForm);
-
+router.post('/submit-user-data', authController.protect,viewController.updateUserData);
 module.exports=router;

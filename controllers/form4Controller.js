@@ -82,9 +82,9 @@ exports.deleteForm=catchAsync(async (req,res,next)=>{
 
 exports.getForm4Astats=catchAsync(async(req,res,next)=>{
         const stats= await Form4.aggregate([
-            {
-                $match:{age:{$gte:55}}
-            },
+            // {
+            //     $match:{age:{$gte:55}}
+            // },
             {
                 $group: {
                 _id:{$toUpper:'$sex'},

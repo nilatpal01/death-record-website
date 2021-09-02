@@ -1,6 +1,8 @@
 const Form4=require('../models/form4Model');
 const Form4A =require('../models/form4aModel');
+const User =require('../models/userModel');
 const catchAsync=require('../utils/catchAsync');
+const AppError=require('../utils/appError');
 
 
 exports.getOverview=(req,res)=>{
@@ -25,12 +27,11 @@ exports.getOneForm4=catchAsync(async(req,res,next)=>{
     //1)get a form from the collection
     console.log(req.params.id);
     const form=await Form4.findById(req.params.id);
-
     //2)build template
 
     //render that template
     res.status(200).render('form4Detail',{
-        title:form.nameOftheDeceased,
+        title:form.nameOftheDeceased || 'error',
         form
     })
 });
@@ -58,4 +59,25 @@ exports.getLoginForm = catchAsync(async (req, res) => {
         title: 'Login to your account',
       });
   });
-//.set("Content-Security-Policy", "connect-src 'self' https://cdnjs.cloudflare.com")
+
+  exports.getAccount=(req,res)=>{
+    res
+    .status(200)
+    .render('account', {
+      title: 'Your account',
+    });
+}
+
+exports.updateUserData=catchAsync(async(req,res,next)=>{
+    const updatedUser= await User.findByIdAndUpdate(req.user.id,{
+        name:req.body.name,
+        email:req.body.email
+    },{
+        new:true,
+        runValidators:true
+    });
+    res.status(200).render('account', {
+        title: 'Your account',
+        user:updatedUser
+    });
+});

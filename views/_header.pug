@@ -11,7 +11,8 @@ header.header
     -console.log(user)
     if user 
         a.nav__el.nav__el--logout Log out
-        img.nav__user-img(src='/img/user.png' alt='user photo')
+        a.nav__el(href="/me")
+        img.nav__user-img(src='/img/user.png' alt='user-photo')
         span.user__name=user.name.split(' ')[0]
     else
         a.nav__el.nav__el--cta(href='/login') Log in 

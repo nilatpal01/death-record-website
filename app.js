@@ -25,26 +25,25 @@ app.set('views', path.join(__dirname, 'views'));
 //GLOBAL MIDDLEWARES
 
 //Set security HTTP headers
-    app.use(
-        helmet({
-          contentSecurityPolicy: {
-            directives: {
-              defaultSrc: ["'self'", 'http://127.0.0.1:3000/*'],
-              baseUri: ["'self'"],
-              fontSrc: ["'self'", 'https:', 'data:'],
-              scriptSrc: [
-                "'self'",
-                'https://*.stripe.com',
-                'https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js',
-              ],
-              frameSrc: ["'self'", 'https://*.stripe.com'],
-              objectSrc: ["'none'"],
-              styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
-              upgradeInsecureRequests: [],
-            },
-          },
-        })
-      );
+const scriptSources = ["'self'", "'unsafe-inline'", "'unsafe-eval'"];
+const styleSources = ["'self'", "'unsafe-inline'"];
+const connectSources = ["'self'"];
+
+app.use(
+  helmet.contentSecurityPolicy({
+    defaultSrc: ["'self'"],
+    scriptSrc: scriptSources,
+    scriptSrcElem: scriptSources,
+    styleSrc: styleSources,
+    connectSrc: connectSources,
+    reportUri: '/report-violation',
+    reportOnly: false,
+    safari5: false  
+  })
+);
+app.use(helmet({
+  contentSecurityPolicy: false,
+}));
 
 //development logging
 if (process.env.NODE_ENV ==='development'){
@@ -62,6 +61,10 @@ app.use('/api', limiter);
 
 //Body parser,reading data from the body into req.body
 app.use(express.json({limit:'10kb'}));
+app.use(express.urlencoded({
+  extended:true,
+  limit:'10Kb'
+}));
 app.use(cookieParser());
 
 //Data sanitization aganist NOSQL query injection

@@ -1,17 +1,18 @@
 {
-  "name": "mccd",
+  "name": "mcdt",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start:dev": "nodemon server.js",
     "start:prod": "set NODE_ENV=production&&nodemon server.js",
-    "watch:js": "parcel watch ./public/js/index.js  --out-dir ./public/js --out-file bundle.js",
-    "build:js": "parcel build ./public/js/index.js  --out-dir ./public/js --out-file bundle.js",
-    "start": "node server.js"
+    "watch:js": "parcel watch --no-hmr ./public/js/index.js --out-dir ./public/js --public-url /js --out-file bundle.js",
+    "bundle:js": "parcel bundle --no-hmr ./public/js/index.js --out-dir ./public/js --public-url /js --out-file bundle.js"
   },
-  "author": "nilatpal",
+  "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.5",
@@ -27,18 +28,11 @@
     "morgan": "^1.10.0",
     "nodemailer": "^6.6.3",
     "pug": "^3.0.2",
-    "reinstall": "^2.0.0",
     "validator": "^13.6.0",
     "win-node-env": "^0.4.0",
     "xss-clean": "^0.1.1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nilatpal01/death-record-website.git"
-  },
-  "bugs": {
-    "url": "https://github.com/nilatpal01/death-record-website/issues"
-  },
-  "homepage": "https://github.com/nilatpal01/death-record-website#readme",
-  "description": ""
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
 }

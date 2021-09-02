@@ -1,7 +1,7 @@
 const AppError=require('../utils/appError');
 
 const handleCastErrorDB=err=>{
-    const message=`Invalid ${err.path}: ${err.value}`;
+    const message=`There is no form found with that ID`;
     return new AppError(message,400);
 };
 
@@ -23,36 +23,60 @@ const handleValidationErrorDB=err=>{
     return new AppError(message,400);
 }
 
-const sendErrorDev=(err,res)=>{
-    res.status(err.statusCode).json({
+const sendErrorDev=(err,req,res)=>{
+    //A)API
+    if(req.originalUrl.startsWith('/api')){
+    return res.status(err.statusCode).json({
         status:err.status,
         error:err,
         message:err.message,
         stack:err.stack
     });
+}
+    //B)RENDERED WEBSITE
+    console.error('ERROR',err);
+    return res.status(err.statusCode).render('error',{
+        title:'Something went wrong',
+        msg:err.message
+    })
 };
 
-const sendErrorProd=(err,res)=>{
-    //Opeartional,trusted error:send message to client
+const sendErrorProd=(err,req,res)=>{
+    //A)API
+    if(req.originalUrl.startsWith('/api')){
+    //A)Opeartional,trusted error:send message to client
     if(err.isOperational){
-    res.status(err.statusCode).json({
+    return res.status(err.statusCode).json({
         status:err.status,
         message:err.message
     });
-}
-
-//Programming or other unknown error: Don't leak error details
-else{
+    }
+    //B)Programming or other unknown error: Don't leak error details
     //1)Log error
     console.error('ERROR',err);
-
     //2)Send generic message
-    res.status(500).json({
+    return res.status(500).json({
         status:'error',
         message:'Something went very wrong'
     });
-}
-};
+    }
+    //B)RENDERED WEBSITE
+    if(err.isOperational){
+    return res.status(err.statusCode).render('error',{
+            title:'Something went wrong',
+            msg:err.message
+     });
+    }
+    //Programming or other unknown error: Don't leak error details
+        //1)Log error
+        console.error('ERROR',err);
+    
+        //2)Send generic message
+        return res.status(err.statusCode).render('error',{
+            title:'Something went wrong',
+            msg: 'PLease try again later'
+     });
+    };
 
 
 module.exports=(err,req,res,next)=>{
@@ -61,7 +85,7 @@ module.exports=(err,req,res,next)=>{
     err.status=err.status || 'error';
 
     if(process.env.NODE_ENV==='development'){
-       sendErrorDev(err,res);
+       sendErrorDev(err,req,res);
     }
     else if(process.env.NODE_ENV==='production'){
     if(err.name==='CastError') err=handleCastErrorDB(err);
@@ -69,6 +93,6 @@ module.exports=(err,req,res,next)=>{
     if(err.name==='ValidationError') err=handleValidationErrorDB(err);
     if(err.name==='JsonWebTokenError') err=handleJWTError();
     if(err.name==='TokenExpiredError') err=handleJWTExpiredError();
-    sendErrorProd(err,res);
+    sendErrorProd(err,req,res);
     }
 };

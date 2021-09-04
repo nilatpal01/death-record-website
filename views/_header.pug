@@ -1,19 +1,18 @@
 header.header 
     nav.nav.nav--forms 
-        a.nav__el.nav--link(href="#") Forms
-        a.nav__el.nav--link(href="#") Manuals
-        a.nav__el.nav--link(href="#") FAQs
-        a.nav__el.nav--link(href="#") How To Apply
-
+        a.nav__el(href='/') Home
+        a.nav__el(href='#') Forms
+        a.nav__el(href='#') Manuals
+        a.nav__el(href='#') FAQs
+        a.nav__el(href='#') How To Apply
     .header__logo 
         img(src='/img/logo-white.png' alt='logo')
     nav.nav.nav--user
-    -console.log(user)
     if user 
         a.nav__el.nav__el--logout Log out
         a.nav__el(href="/me")
-        img.nav__user-img(src='/img/user.png' alt='user-photo')
-        span.user__name=user.name.split(' ')[0]
+            img.nav__user-img(src='/img/user.png' alt='user-photo')
+            span.user__name=user.name.split(' ')[0]
     else
-        a.nav__el.nav__el--cta(href='/login') Log in 
-        a.nav__el.nav__el--cta(href='#') Sign up
+        a.nav__el(href='/login') Log in 
+        a.nav__el.nav__el--cta(href='/signup') Sign up

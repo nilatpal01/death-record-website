@@ -60,6 +60,31 @@ exports.getLoginForm = catchAsync(async (req, res) => {
       });
   });
 
+exports.getSignupForm = catchAsync(async (req, res) => {
+    res
+      .status(200)
+      .set(
+        'Content-Security-Policy',
+        "script-src 'self' https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js 'unsafe-inline' 'unsafe-eval';"
+      )
+      .render('signup', {
+        title: 'Signup for a new account',
+      });
+  });
+     
+
+  exports.getUserOverview=catchAsync(async(req,res)=>{
+      res
+      .status(200)
+      .set(
+        'Content-Security-Policy',
+        "script-src 'self' https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js 'unsafe-inline' 'unsafe-eval';"
+      )
+      .render('userOverview', {
+        title: 'welcome',
+      });
+  });
+
   exports.getAccount=(req,res)=>{
     res
     .status(200)
@@ -80,4 +105,16 @@ exports.updateUserData=catchAsync(async(req,res,next)=>{
         title: 'Your account',
         user:updatedUser
     });
+});
+
+exports.createForm4=catchAsync(async(req,res,next)=>{
+  res
+  .status(200)
+  .set(
+    'Content-Security-Policy',
+    "script-src 'self' https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js 'unsafe-inline' 'unsafe-eval';"
+  )
+  .render('createForm4', {
+    title: 'fill form 4',
+  });
 });

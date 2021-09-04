@@ -8492,7 +8492,7 @@ exports.showAlert = showAlert;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.logout = exports.login = void 0;
+exports.signup = exports.logout = exports.login = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -8529,7 +8529,7 @@ var login = /*#__PURE__*/function () {
             if (res.data.data.user.role != 'admin') {
               (0, _alert.showAlert)('success', 'logged in successfully');
               window.setTimeout(function () {
-                location.assign('/');
+                location.assign('/userOverview');
               }, 1500);
             } else {
               (0, _alert.showAlert)('success', 'logged in successfully! you are an admin');
@@ -8605,6 +8605,59 @@ var logout = /*#__PURE__*/function () {
 }();
 
 exports.logout = logout;
+
+var signup = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(name, email, password, passwordConfirm) {
+    var res;
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            _context3.next = 3;
+            return (0, _axios.default)({
+              method: 'POST',
+              url: 'http://127.0.0.1:8000/api/v1/users/signup',
+              data: {
+                name: name,
+                email: email,
+                password: password,
+                passwordConfirm: passwordConfirm
+              }
+            });
+
+          case 3:
+            res = _context3.sent;
+
+            if (res.data.status === 'success') {
+              (0, _alert.showAlert)('success', 'account has been created successfully!');
+              window.setTimeout(function () {
+                location.assign('/');
+              }, 1500);
+            }
+
+            _context3.next = 10;
+            break;
+
+          case 7:
+            _context3.prev = 7;
+            _context3.t0 = _context3["catch"](0);
+            (0, _alert.showAlert)('error', _context3.t0.response.data.message);
+
+          case 10:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, null, [[0, 7]]);
+  }));
+
+  return function signup(_x3, _x4, _x5, _x6) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+exports.signup = signup;
 },{"axios":"../../node_modules/axios/index.js","./alert":"alert.js"}],"updateSettings.js":[function(require,module,exports) {
 "use strict";
 
@@ -8946,6 +8999,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var loginForm = document.querySelector('.form--login');
+var signupForm = document.querySelector('.form--signup');
 var logOutBtn = document.querySelector('.nav__el--logout ');
 var updateDataForm = document.querySelector('.form-user-data');
 var updatePasswordForm = document.querySelector('.form-user-password');
@@ -8961,6 +9015,19 @@ if (loginForm) {
 
 ;
 if (logOutBtn) logOutBtn.addEventListener('click', _login.logout);
+
+if (signupForm) {
+  signupForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    var passwordConfirm = document.getElementById('passwordConfirm').value;
+    (0, _login.signup)(name, email, password, passwordConfirm);
+  });
+}
+
+;
 
 if (updateDataForm) {
   updateDataForm.addEventListener('submit', function (e) {

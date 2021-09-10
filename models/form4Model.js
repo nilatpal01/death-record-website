@@ -6,10 +6,6 @@ const form4Schema=new mongoose.Schema({
         required:[true,'Hospital name is a required field']
     },
     wardNo:Number,
-    hospitalLocation:{
-        type:String,
-        required: [true,'Hospital must have a location']
-    },
     nameOftheDeceased:{
         type:String,
         required: [true,'Name of the deceased is a required field'],
@@ -24,23 +20,31 @@ const form4Schema=new mongoose.Schema({
         }
     },
     age:Number,
+    ageType:
+    {type:String,
+    required:true
+    },
+    fullAge:String,
+
     causeOfDeath:{
         type:String,
         required:[true,'cause of death is a required field']
     },
     immediateCause:String,
-    antecedentCause1:String,
-    antecedentCause2:String,
+    antecedentCause:String,
     otherSignificantCause:String,
     mannerOfDeath:{
         type:String,
         enum:{
-            values:['natural','accident','suicide','homicide','pending information'],
+            values:['natural','accident','suicide','homicide','pending investigation'],
             message:'you have entered wrong value'
         }
     },
-    onsetDate:Date,
-    deathDate:Date,
+    intervalOnsetDeath:{
+        type:String,
+        required:true
+    },
+    deathTime:String,
     howInjuryOccured:String,
     createdAt: {
         type: Date,
@@ -51,6 +55,7 @@ const form4Schema=new mongoose.Schema({
     isFemale:Boolean,
     isDelivery:Boolean,
     isVerified:Boolean,
+    rejectReason:String,
     isApproved:Boolean
 },
 {
@@ -58,24 +63,29 @@ const form4Schema=new mongoose.Schema({
     toObject:{virtuals:true}
 });
 
-form4Schema.virtual('betweenOnsetAndDeath').get(function (){
-    const interval=Math.abs(this.deathDate-this.onsetDate);
-    const days=interval/(1000 * 60 * 60*24);
-    if(days>=1){
-        return `${days} days`;
-    }
-    else{
-        const hours=interval/(1000 * 60 * 60);
-        if(hours>=1){
-            return `${hours} hours`;
-        }
-        else{
-            const minutes=interval/(1000 * 60)
-            return `${minutes} minutes`
-        }
-    }
+
+form4Schema.pre('save', function(next){
+   this.fullAge = "" + this.age + " " + this.ageType;
+   next();
+})
+// form4Schema.virtual('betweenOnsetAndDeath').get(function (){
+//     const interval=Math.abs(this.deathDate-this.onsetDate);
+//     const days=interval/(1000 * 60 * 60*24);
+//     if(days>=1){
+//         return `${days} days`;
+//     }
+//     else{
+//         const hours=interval/(1000 * 60 * 60);
+//         if(hours>=1){
+//             return `${hours} hours`;
+//         }
+//         else{
+//             const minutes=interval/(1000 * 60)
+//             return `${minutes} minutes`
+//         }
+//     }
     
-});
+// });
 
 const Form4=mongoose.model('Form4',form4Schema);
 

@@ -1,0 +1,104 @@
+extends base
+
+block content
+    section.section__form4a
+        .section__form4a--header         
+            h1.heading-form4
+                span.heading-text='Form4'
+                br
+                span.heading-text='(See Rule no. 7)'
+                br
+                span.heading-text= 'Medical Certificate of cause of Death'
+            p.heading-paragraph 
+                span.form4-para='(For non-institutional deaths. Not to be used for stillbirths)'
+                br
+                span.fomr4-para='To be sent to Registrar along with Form no.2 (Death Report)'
+                
+        .section__form-create
+            form.form.form-create-form4a
+                    .form__group
+                        p.form__paragraph I hereby certify that the deceased 
+                        select#namePrefix.form--select(namePrefix)
+                            option(value='Shri') Shri 
+                            option(value='Smt') Smt
+                            option(value='.km') .Km
+                        input#nameOftheDeceased.form__input-small(type='text', placeholder='deceased_name_here',required)
+                        select#relation.form--select(relation)
+                            option(value='son of') Son Of 
+                            option(value='wife of') Wife Of
+                            option(value='daughter of') Daughter Of
+                        input#relationName.form__input-small(type='text', placeholder='relation_name_here',required)
+                        p.form__paragraph resident of
+                        input#residentLoction.form__input-small(type='text', placeholder='resident_location_here',required)
+                        p.form__paragraph was under my treatment form
+                        input#treatmentStartOn.form__input-small(type='date', placeholder='yyyy-mm-dd',required)
+                        p.form__paragraph to
+                        input#treatmentEndOn.form__input-small(type='date', placeholder='yyyy-mm-dd',required)
+                        p.form__paragraph and
+                        select#heshe.form--select(heshe)
+                            option(value='He') he
+                            option(value='She') she 
+                        p.form__paragraph died on
+                        input#patientDiedOn.form__input-small(type='date', placeholder='date',required)
+                        p.form__paragraph at 
+                        input#deathTime.form__input-small(type='text', placeholder='time_of_death_here',required)
+                    .line
+                    .form__group
+                        label.form__label--small(for='Sex') Sex
+                        select#sex.form--select(sex)
+                            option(value='male') Male 
+                            option(value='female') Female 
+                    .form__group        
+                        label.form__label(for='age') Age at Death
+                        input#age.form__input-small(type='number', placeholder='age',required)
+                        select#ageType.form--select(ageType) 
+                            option(value='years') Years
+                            option(value='months') Months
+                            option(value='days') Days
+                            option(value='hours') Hours
+                    .form__group
+                        label.form__label--small(for='causeOfDeath') Cause of Death
+                        input#causeOfDeath.form__input-small(type='text', placeholder='cause_of_death_here',required)
+                        label.form__label--small(for='intervalBetweenOnsetDeath') Interval between onset and death 
+                        input#intervalBetweenOnsetDeath.form__input-small(type='text', placeholder='time',required)
+                    .form__group
+                        label.form__label(for='numbering') I.
+                        label.form__label(for='ImmediateCause') Immediate Cause 
+                        p.form__paragraph State the disease, injury or complication which caused death, not the mode of dying such as heart failure, asthenia etc.
+                        input#immediateCause.form__input(type='text', placeholder='your_text_here',required)
+                        label.form__label(for='AntacedentCause') Antacedent Cause 
+                        p.form__paragraph Morbid conditions, if any, giving rise to the above Cause, staying underlying condition last
+                        input#antacedentCause.form__input(type='text', placeholder='your_text_here',required)
+                    .form__group
+                        label.form__label(for='numbering') II.
+                        p.form__paragraph Other significant conditions contributing to the death but not related to the disease or conditions causing
+                        input#otherSignificantCause.form__input(type='text', placeholder='your_text_here',required)
+                    .line
+                    .form__group
+                        label.form__label--small(for='mannerOfDeath') Manner of Death
+                        select#mannerOfDeath.form--select(mannerOfDeath) 
+                            option(value='natural') Natural
+                            option(value='accident') Accident
+                            option(value='suicide') Suicide
+                            option(value='homicide') Homicide
+                            option(value='pending investigation') Pending Investigation
+                        label.form__label(for='howInjury') How did the injury occured
+                        input#howInjuryOccured.form__input(type='text', placeholder='text_here',required)
+                
+                    .form__group
+                        label.form__label--small(for='ispregnent') If deceased was a female, was pregnency the death associated with?
+                        select#isFemale.form--select(isPregnent) 
+                            option(value='true') Yes
+                            option(value='false') No
+                        br
+                        label.form__label--small(for='ispregnent') If yes, was there a delivery?
+                        select#isDelivery.form--select(isdelivery) 
+                            option(value='false') No
+                            option(value='No') Yes
+                    .line
+                    .form__group.center
+                         button.btn.btn--small.btn--green Submit
+
+
+        
+

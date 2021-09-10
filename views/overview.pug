@@ -1,4 +1,54 @@
-extends base
+doctype html
+html
+    head 
+        block head
 
-block content 
-    h1 this is the form overview
+            meta(charset='UTF-8')
+            meta(name='viewport' content='width=device-width, initial-scale=1.0')
+            title Death Record | #{title}
+            link(rel='stylesheet' href='/css/style.css' type='text/css')
+            link(rel='shortcut icon' type='image/png' href='/img/favicon.png')
+            link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:300,300i,400,500,700')
+
+    body 
+        header.headerHome 
+            .headerHome__logo--left 
+                img(src='/img/cdac-logo1.png' alt='logo-cdac')
+            
+            .headerHome__main 
+                h1.heading-home S.B.H.I & V.S
+                h1.heading-home GOVERNMENT OF MAHARASTRA
+                h1.heading-home MOKSHAM
+
+            .headerHome__logo--right
+                img(src='/img/logo-azadi.png' alt='logo-azadi')
+        .slider-container
+            .slider-frame
+                .slide-images 
+                    .img-container.firstImg
+                        h1.heading-img A portal for death records management
+                    .img-container.secondImg
+                        h1.heading-img Developed by CDAC Silchar
+                        //- img(src='/img/2.jpg')
+                        
+                    .img-container.thirdImg
+                        h1.heading-img Welcome to Moksham 
+                        //- img(src='/img/3.jpg')
+                        
+            .sectionHome
+                h1.heading-home.heading-home-modified.center How this works?
+                p.paragraph-home Aliquam nec ex dapibus, lobortis metus sed, ultrices tortor. Phasellus vel ex sollicitudin, faucibus ipsum sed, maximus lectus. Suspendisse efficitur vitae odio nec vestibulum. Duis ac imperdiet orci. Nullam et lacus lacus. Sed tincidunt ante id nulla tincidunt tincidunt. Etiam ac egestas enim, ac sagittis lacus. Vivamus elementum lectus ac tortor interdum, eu malesuada leo mollis. Vestibulum gravida aliquam porttitor. Sed laoreet tempor justo. In facilisis metus eu ipsum hendrerit vestibulum. Nunc tempus laoreet elit, sit amet mollis est rutrum ac. Suspendisse potenti. Phasellus sodales magna quam, sed lacinia ante fermentum luctus. Proin vitae mattis mi, et bibendum ipsum.
+                h1.heading-home.heading-home-modified.center Please login or signup
+                h1.heading-home.heading-home-modified.center to continue
+                .btn--home.center
+                    a.nav__el.nav__el--home(href='/login') Log in 
+                    a.nav__el.nav__el--home(href='/signup') Sign up
+                
+        footer.footer.footer--home
+            .footer__logo 
+                img(src='/img/logo-yellow.png' alt='logo')
+            ul.footer__nav 
+                li: a(href='#') About us
+                li: a(href='#') CDAC 
+                li: a(href='#') Contact
+            p.footer__copyright &copy; by CDAC Silchar

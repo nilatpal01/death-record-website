@@ -13,7 +13,7 @@ exports.getOverview=(req,res)=>{
 
 exports.getForm4=catchAsync(async(req,res,next)=>{
     //1)get form data from collection
-    const forms=await Form4.find();
+    const forms=await Form4.find({isVerified:false});
     //2)build template
 
     //3)Render that template using form data from 1
@@ -85,6 +85,18 @@ exports.getSignupForm = catchAsync(async (req, res) => {
       });
   });
 
+  exports.getAdminOverview=catchAsync(async(req,res)=>{
+    res
+    .status(200)
+    .set(
+      'Content-Security-Policy',
+      "script-src 'self' https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js 'unsafe-inline' 'unsafe-eval';"
+    )
+    .render('adminOverview', {
+      title: 'welcome',
+    });
+});
+
   exports.getAccount=(req,res)=>{
     res
     .status(200)
@@ -107,6 +119,7 @@ exports.updateUserData=catchAsync(async(req,res,next)=>{
     });
 });
 
+
 exports.createForm4=catchAsync(async(req,res,next)=>{
   res
   .status(200)
@@ -116,5 +129,17 @@ exports.createForm4=catchAsync(async(req,res,next)=>{
   )
   .render('createForm4', {
     title: 'fill form 4',
+  });
+});
+
+exports.createForm4a=catchAsync(async(req,res,next)=>{
+  res
+  .status(200)
+  .set(
+    'Content-Security-Policy',
+    "script-src 'self' https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js 'unsafe-inline' 'unsafe-eval';"
+  )
+  .render('createForm4a', {
+    title: 'fill-form-4a',
   });
 });

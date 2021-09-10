@@ -1,12 +1,15 @@
 const mongoose=require('mongoose');
 
-
 const Form4aSchema=new mongoose.Schema({
     nameOftheDeceased:{
         type:String,
         required: [true,'Name of the deceased is a required field'],
         unique:true
     },
+    namePrefix:String,
+
+    fullName:String,
+
     relation:{
         type:String,
         enum:{
@@ -18,9 +21,11 @@ const Form4aSchema=new mongoose.Schema({
         type:String,
         required:['true','it is a required field']
     },
-    patientLocation:String,
+    residentLocation:String,
     treatmentStartOn:Date,
+    patientDiedOn:Date,
     treatmentEndOn:Date,
+    deathTime:String,
     sex:{
         type:String,
         required:[true,'Sex is a required field'],
@@ -30,13 +35,14 @@ const Form4aSchema=new mongoose.Schema({
         }
     },
     age:Number,
+    ageType:String,
+    fullAge:String,
     causeOfDeath:{
         type:String,
         required:[true,'cause of death is a required field']
     },
     immediateCause:String,
     antecedentCause1:String,
-    antecedentCause2:String,
     otherSignificantCause:String,
     mannerOfDeath:{
         type:String,
@@ -45,8 +51,7 @@ const Form4aSchema=new mongoose.Schema({
             message:'you have entered wrong value'
         }
     },
-    onsetDate:Date,
-    deathDate:Date,
+    intervalOnsetDeath:String,
     howInjuryOccured:String,
     createdAt: {
         type: Date,
@@ -63,6 +68,12 @@ const Form4aSchema=new mongoose.Schema({
     toJSON:{virtuals:true},
     toObject:{virtuals:true}
 });
+
+Form4aSchema.pre('save', function(next){
+    this.fullAge = "" + this.age + " " + this.ageType;
+    this.fullName=this.namePrefix+" "+this.nameOftheDeceased;
+    next();
+ })
 /*
 
 form4ASchema.virtual('betweenOnsetAndDeath').get(function (){

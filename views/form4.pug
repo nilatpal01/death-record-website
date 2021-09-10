@@ -15,12 +15,8 @@ block content
                         h4.card__sub-heading=form.hospitalName
                         .card__data 
                             svg.card__icon 
-                                use(xlink:href='img/icons.svg#icon-map-pin') 
-                            span=form.hospitalLocation
-                        .card__data 
-                            svg.card__icon 
-                                use(xlink:href='img/icons.svg#icon-calendar')
-                            span=form.deathDate.toLocaleString('en-us', {month:'long', year: 'numeric'})
+                                use(xlink:href='img/icons.svg#icon-watch')
+                            span=form.deathTime
                         .card__data 
                             svg.card__icon 
                                 use(xlink:href='img/icons.svg#icon-info')

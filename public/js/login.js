@@ -22,7 +22,7 @@ export const login = async (email, password) => {
     else{
       showAlert('success', 'logged in successfully! you are an admin');
       window.setTimeout(()=>{
-        location.assign('/form4')
+        location.assign('/admin-overview')
       },1500);
     }
 
@@ -64,7 +64,7 @@ export const signup = async (name, email, password, passwordConfirm) => {
     if(res.data.status==='success'){
       showAlert('success', 'account has been created successfully!');
       window.setTimeout(()=>{
-        location.assign('/')
+        location.assign('/userOverview')
       },1500);
     }
 

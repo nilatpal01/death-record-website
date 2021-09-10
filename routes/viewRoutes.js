@@ -13,9 +13,12 @@ router.get('/signup',viewController.getSignupForm);
 router.get('/me', authController.protect,viewController.getAccount);
 
 router.get('/userOverview',authController.isLoggedIn,viewController.getUserOverview);
+router.get('/admin-overview',authController.isLoggedIn,viewController.getAdminOverview);
 
 router.post('/submit-user-data', authController.protect,viewController.updateUserData);
 
 //creating forms
 router.get('/post-form4',authController.isLoggedIn,viewController.createForm4);
+router.get('/post-form4a',authController.isLoggedIn,viewController.createForm4a);
+
 module.exports=router;

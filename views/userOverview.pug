@@ -2,15 +2,17 @@ extends base
 
 block content
     main.main
-        .userOverview
-            .userOverview__main--box
-
-                h1.heading-primary.ma-bt-lg=`Welcome ${user.name}`
-                br
-                h1.heading-primary.ma-bt-lg='Please click on a form to fill'
-                br
-                .center
-                    a.nav__el.nav__el--bg(href='/post-form4') Form 4
-                    a.nav__el.nav__el--bg(href='/post-form4a') Form 4a
+        .jumbotron.jumbotron-modifier.text-center
+            .jumbo-text
+                h1.heading-primary
+                    span WELCOME
+                    br
+                    span=`${user.name}`.toUpperCase()
+                    br
+                    span PLEASE CHOOSE A FORM 
+                    br
+            .jumbo-btn
+                a.btn.btn-light.btn-outline-primary.btn-lg(href='/post-form4') FORM 4
+                a.btn.btn-light.btn-outline-primary.btn-lg(href='/post-form4a') FORM 4A
               
 

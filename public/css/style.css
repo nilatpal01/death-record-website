@@ -238,7 +238,7 @@ color-blue:#2980b9
 
 
 /*-----------------NAV----------------------*/
-
+/* 
 .nav {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -271,36 +271,7 @@ color-blue:#2980b9
       margin-bottom: 0;
     }
   }
-  .nav__el,
-  .nav__el:link,
-  .nav__el:visited {
-    color: #f7f7f7;
-    text-transform: uppercase;
-    font-size: 1.6rem;
-    text-decoration: none;
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-transition: all 0.2s;
-    transition: all 0.2s;
-    font-weight: 400;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-  }
-  .nav__el:hover,
-  .nav__el:active {
-    -webkit-transform: translateY(-2px);
-    transform: translateY(-2px);
-    text-shadow: 0 0.7rem 1rem black;
-  }
-  .nav__el:not(:last-child) {
-    margin-right: 3rem;
-  }
+  
   @media only screen and (max-width: 37.5em) {
     .nav__el:not(:last-child) {
       margin-right: 0;
@@ -395,8 +366,39 @@ color-blue:#2980b9
     width: 3.5rem;
     border-radius: 50%;
     margin-right: 1rem;
-  }
+  } */
 
+
+  .nav__el,
+  .nav__el:link,
+  .nav__el:visited {
+    color: #f7f7f7;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    text-decoration: none;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    font-weight: 400;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .nav__el:hover,
+  .nav__el:active {
+    -webkit-transform: translateY(-2px);
+    transform: translateY(-2px);
+    text-shadow: 0 0.7rem 1rem black;
+  }
+  .nav__el:not(:last-child) {
+    margin-right: 3rem;
+  }
   .user__name{
     color: #fff;
     font-size:1.75rem;
@@ -1481,4 +1483,11 @@ border-radius: 5px;
   color: #fff;
   font-weight:300;
   line-height: 3rem;
+}
+
+/*******************************************************bootstrap*************************************************/
+
+.nav-logo{
+  height:100px;
+  width: auto;
 }

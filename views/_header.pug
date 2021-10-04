@@ -1,18 +1,34 @@
-header.header 
-    nav.nav.nav--forms 
-        a.nav__el(href='/') Home
-        a.nav__el(href='#') Forms
-        a.nav__el(href='#') Manuals
-        a.nav__el(href='#') FAQs
-        a.nav__el(href='#') How To Apply
-    .header__logo 
-        img(src='/img/logo-white.png' alt='logo')
-    nav.nav.nav--user
-    if user 
-        a.nav__el.nav__el--logout Log out
-        a.nav__el(href="/me")
-            img.nav__user-img(src='/img/user.png' alt='user-photo')
-            span.user__name=user.name.split(' ')[0]
-    else
-        a.nav__el(href='/login') Log in 
-        a.nav__el.nav__el--cta(href='/signup') Sign up
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+    a.navbar-brand(href='#')
+        img.nav-logo(src='/img/cdac-logo.png')
+    p.navbar-brand.navbar-brand-modifier.mx-auto
+        span S.B.H.I & V.S
+        br
+        span MOKSHAM
+        br
+        span GOVERNMENT OF MAHARASTRA
+    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+  
+    .collapse.navbar-collapse(id='navbarSupportedContent')
+        ul.navbar-nav.ml-auto.text-center
+            li.nav-item
+                a.nav-link(href='#') Home
+            li.nav-item
+                a.nav-link(href='#') How to apply
+            li.nav-item
+                a.nav-link(href='#') FAQs
+  
+        ul.navbar-nav.nav-modifier.float-right
+            if user
+                li.nav-item
+                    a.nav-link.nav__el(href="/me")
+                        img.nav__user-img(src='/img/user.png' alt='user-photo')
+                        span.user__name=user.name.split(' ')[0]    
+                li.nav-item 
+                    a.nav-link.nav__el.nav__el--logout Log out
+            else
+                li.nav-item
+                    a.nav-link(href='/login') Log in 
+                li.nav-item
+                    a.nav-link(href='/signup') Sign up

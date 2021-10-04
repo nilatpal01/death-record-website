@@ -127,7 +127,7 @@ exports.createForm4=catchAsync(async(req,res,next)=>{
     'Content-Security-Policy',
     "script-src 'self' https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js 'unsafe-inline' 'unsafe-eval';"
   )
-  .render('createForm4', {
+  .render('fillForm4', {
     title: 'fill form 4',
   });
 });

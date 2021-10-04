@@ -2,7 +2,7 @@ const path=require('path');
 const express=require('express');
 const morgan=require('morgan');
 const rateLimit=require('express-rate-limit');
-const helmet=require('helmet');
+// const helmet=require('helmet');
 const mongoSanitize=require('express-mongo-sanitize');
 const xss=require('xss-clean');
 const hpp=require('hpp');
@@ -25,25 +25,25 @@ app.set('views', path.join(__dirname, 'views'));
 //GLOBAL MIDDLEWARES
 
 //Set security HTTP headers
-const scriptSources = ["'self'", "'unsafe-inline'", "'unsafe-eval'"];
-const styleSources = ["'self'", "'unsafe-inline'"];
-const connectSources = ["'self'"];
+// const scriptSources = ["'self'", "'unsafe-inline'", "'unsafe-eval'"];
+// const styleSources = ["'self'", "'unsafe-inline'"];
+// const connectSources = ["'self'"];
 
-app.use(
-  helmet.contentSecurityPolicy({
-    defaultSrc: ["'self'"],
-    scriptSrc: scriptSources,
-    scriptSrcElem: scriptSources,
-    styleSrc: styleSources,
-    connectSrc: connectSources,
-    reportUri: '/report-violation',
-    reportOnly: false,
-    safari5: false  
-  })
-);
-app.use(helmet({
-  contentSecurityPolicy: false,
-}));
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     defaultSrc: ["'self'"],
+//     scriptSrc: scriptSources,
+//     scriptSrcElem: scriptSources,
+//     styleSrc: styleSources,
+//     connectSrc: connectSources,
+//     reportUri: '/report-violation',
+//     reportOnly: false,
+//     safari5: false  
+//   })
+// );
+// app.use(helmet({
+//   contentSecurityPolicy: false,
+// }));
 
 //development logging
 if (process.env.NODE_ENV ==='development'){

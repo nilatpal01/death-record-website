@@ -2,15 +2,16 @@ extends base
 
 block content 
     main.main 
-        .login-form 
-            h2.heading-secondary.ma-bt-lg Log into your account 
-            form.form.form--login
-                .form__group
-                    label.form__label(for='email') Email address 
-                    input#email.form__input(type='email', placeholder='you@example.com',required)
-                .form__group.ma-bt-md 
-                    label.form__label(for='password') Password 
-                    input#password.form__input(type='password', placeholder='.........',required,
-                    minlength='8')
-                .form__group 
-                button.btn.btn--green Login
+        .jumbotron.jumbotron-modifier
+            .login-form 
+                h1.heading-primary.ma-bt Log into your account
+                form.form.form--login
+                    .form-group
+                        label.form__label(for='email') EMAIL ADDRESS:
+                        input#email.form__input.form-control(type='email', placeholder='you@example.com',required)
+                    .form-group
+                        label.form__label(for='password') PASSWORD: 
+                        input#password.form__input.form-control(type='password', placeholder='.........',required,
+                        minlength='8')
+                    .for-group.text-center
+                    button.btn.btn-light.btn-outline-primary.btn-lg Login

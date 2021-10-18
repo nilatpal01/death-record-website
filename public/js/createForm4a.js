@@ -1,17 +1,17 @@
 import axios from 'axios';
 import { showAlert } from './alert';
 
-export const createForm4a=async(namePrefix,nameOftheDeceased,relation,relationName,residentLoction,treatmentStartOn,treatmentEndOn,patientDiedOn,
-    deathTime,sex,age,ageType,causeOfDeath,intervalOnsetDeath,antacedentCause,
-    immediateCause,otherSignificantCause,mannerOfDeath,howInjuryOccured,isFemale,isDelivery)=>{
+export const createForm4a=async(namePrefix,nameOftheDeceased,relation,relationName,residentLocation,treatmentStartOn,treatmentEndOn,patientDiedOn,
+    deathTime,sex,age,ageType,intervalOnsetDeath,immediateCause,antecedentCause,
+    otherSignificantCause,mannerOfDeath,howInjuryOccured,isPregnent,isDelivery)=>{
     try{
         const res=await axios({
             method:'POST',
             url:'http://127.0.0.1:8000/api/v1/form4a',
             data:{
-                namePrefix,nameOftheDeceased,relation,relationName,residentLoction,treatmentStartOn,treatmentEndOn,patientDiedOn,
-                deathTime,sex,age,ageType,causeOfDeath,intervalOnsetDeath,antacedentCause,immediateCause,otherSignificantCause,mannerOfDeath,
-                howInjuryOccured,isFemale,isDelivery
+                namePrefix,nameOftheDeceased,relation,relationName,residentLocation,treatmentStartOn,treatmentEndOn,patientDiedOn,
+                deathTime,sex,age,ageType,intervalOnsetDeath,immediateCause,antecedentCause,otherSignificantCause,mannerOfDeath,
+                howInjuryOccured,isPregnent,isDelivery
             },
         });
     if(res.data.status==='success'){

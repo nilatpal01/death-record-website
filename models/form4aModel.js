@@ -37,17 +37,16 @@ const Form4aSchema=new mongoose.Schema({
     age:Number,
     ageType:String,
     fullAge:String,
-    causeOfDeath:{
+    immediateCause:{
         type:String,
-        required:[true,'cause of death is a required field']
+        required:[true,'Immediate Cause is a required field']
     },
-    immediateCause:String,
-    antecedentCause1:String,
+    antecedentCause:String,
     otherSignificantCause:String,
     mannerOfDeath:{
         type:String,
         enum:{
-            values:['natural','accident','suicide','homicide','pending information'],
+            values:['natural','accident','suicide','homicide','pending investigation'],
             message:'you have entered wrong value'
         }
     },
@@ -59,7 +58,7 @@ const Form4aSchema=new mongoose.Schema({
         select: false
     },
 
-    isFemale:Boolean,
+    isPregnent:Boolean,
     isDelivery:Boolean,
     isVerified:Boolean,
     isApproved:Boolean

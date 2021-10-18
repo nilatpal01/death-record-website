@@ -26,10 +26,8 @@ const form4Schema=new mongoose.Schema({
     },
     fullAge:String,
 
-    causeOfDeath:{
-        type:String,
-        required:[true,'cause of death is a required field']
-    },
+    deathDate:Date,
+    deathTime:String,
     immediateCause:String,
     antecedentCause:String,
     otherSignificantCause:String,
@@ -44,7 +42,6 @@ const form4Schema=new mongoose.Schema({
         type:String,
         required:true
     },
-    deathTime:String,
     howInjuryOccured:String,
     createdAt: {
         type: Date,
@@ -52,7 +49,7 @@ const form4Schema=new mongoose.Schema({
         select: false
     },
 
-    isFemale:Boolean,
+    isPregnent:Boolean,
     isDelivery:Boolean,
     isVerified:Boolean,
     rejectReason:String,

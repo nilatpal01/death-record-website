@@ -1,4 +1,47 @@
 extends base
 
 block content 
-    h1 This is the form 4a detail page
+    main.main
+        //- .card-container
+        br
+        each form in forms
+            ul.list-inline.list-inline-modifier
+                li.list-inline-item.list-inline-item-modifier
+                        h4.heading-list Name
+                        br
+                        span.list-info=form.nameOftheDeceased.toUpperCase()
+                //- li.list-inline-item.list-inline-item-modifier
+                //-         h4.heading-list Hospital
+                //-         br
+                //-         span.list-info=form.hospitalName.toUpperCase()
+                li.list-inline-item.list-inline-item-modifier
+                        h4.heading-list Sex
+                        br
+                        span.list-info=form.sex.toUpperCase()
+                li.list-inline-item.list-inline-item-modifier
+                        h4.heading-list Age
+                        br
+                        span.list-info=`${form.age} Years`
+                if form.isVerified===true 
+                    li.list-inline-item.list-inline-item-modifier
+                        h4.heading-list Verification Status
+                        br
+                        h4.badge.badge-success.even-larger-badge Verified !
+                else
+                    li.list-inline-item.list-inline-item-modifier
+                        h4.heading-list  Verification Status
+                        br
+                        h4.badge.badge-danger.even-larger-badge Not Verified !
+
+                if form.isApproved===true 
+                    li.list-inline-item.list-inline-item-modifier
+                        h4.heading-list Approval Status
+                        br
+                        h4.badge.badge-success.even-larger-badge Approved !
+                else
+                    li.list-inline-item.list-inline-item-modifier
+                        h4.heading-list Approval Status
+                        br
+                        h4.badge.badge-danger.even-larger-badge Not Approved ! 
+                li.list-inline-item.list-inline-item-modifier.float-right
+                    a.btn.btn-modifier.btn-success.btn-lg(href=`form4a/${form._id}`) View Full Form

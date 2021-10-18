@@ -3,6 +3,7 @@ const Form4A =require('../models/form4aModel');
 const User =require('../models/userModel');
 const catchAsync=require('../utils/catchAsync');
 const AppError=require('../utils/appError');
+const APIFeatures=require('../utils/apiFeatures');
 
 
 exports.getOverview=(req,res)=>{
@@ -13,7 +14,9 @@ exports.getOverview=(req,res)=>{
 
 exports.getForm4=catchAsync(async(req,res,next)=>{
     //1)get form data from collection
-    const forms=await Form4.find({isVerified:false});
+    const features=new APIFeatures(Form4.find(),req.query).filter().sort().limitFields().pagination();
+    const forms=await features.query;
+    //const forms=await Form4.find();
     //2)build template
 
     //3)Render that template using form data from 1
@@ -38,14 +41,26 @@ exports.getOneForm4=catchAsync(async(req,res,next)=>{
 
 exports.getForm4a=catchAsync(async(req,res,next)=>{
      //1)get form data from collection
-    const forms=await Form4A.find();
-     //2)build template
+    const features=new APIFeatures(Form4A.find(),req.query).filter().sort().limitFields().pagination();
+    const forms=await features.query;  //2)build template
  
      //3)Render that template using form data from 1
     res.status(200).render('form4a',{
         title:'All forms 4a',
         forms
     })
+});
+
+exports.getOneForm4a=catchAsync(async(req,res,next)=>{
+  //1)get form data from collection
+ const form=await Form4A.findById(req.params.id);
+  //2)build template
+
+  //3)Render that template using form data from 1
+ res.status(200).render('form4aDetail',{
+     title:'All forms 4a',
+     form
+ })
 });
 
 exports.getLoginForm = catchAsync(async (req, res) => {
@@ -128,7 +143,7 @@ exports.createForm4=catchAsync(async(req,res,next)=>{
     "script-src 'self' https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js 'unsafe-inline' 'unsafe-eval';"
   )
   .render('fillForm4', {
-    title: 'fill form 4',
+    title: 'Fill Form No.4',
   });
 });
 
@@ -139,7 +154,7 @@ exports.createForm4a=catchAsync(async(req,res,next)=>{
     'Content-Security-Policy',
     "script-src 'self' https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js 'unsafe-inline' 'unsafe-eval';"
   )
-  .render('createForm4a', {
-    title: 'fill-form-4a',
+  .render('fillForm4a', {
+    title: 'Fill Form No.4a',
   });
 });

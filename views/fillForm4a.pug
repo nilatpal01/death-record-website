@@ -2,30 +2,47 @@ extends base
 
 block content
     h3.heading.text-center 
-        span.text-uppercase.font-weight-bold FORM NO.4
+        span.text-uppercase.font-weight-bold FORM NO.4A
         br
         span.font-weight-bold (See Rule no. 7)
         br
         span.text-uppercase.font-weight-bold MEDICAL CERTIFICATE FOR CAUSE OF DEATH
         br
-        span (hospital in patient not to be used for stillbirths)
+        span (For Non-Institutional deaths. Not to be used for stillbirths)
         br
-        span To be sent to Registrar along with Form no.2 (Death Report)
+        span To be sent to Registrar along with From No.2 (Death Report)
 
-    form.form.form-create-form4
+    form.form.form-create-form4a
         .form-group.text-center
-            label.form-label.font-weight-bold(for='hospitalName') Name of the Hospital:
-            input#hospitalName.form-input.form-input--modifier.font-weight-bold(type='text', placeholder=' ..................................................................................',required)
-        .form-group.text-center
-            span I hereby certify that the person whose particulars are given below died in the hospital in 
+            span I hereby certify that the deceased
+            select.mx-2#namePrefix.form--select(namePrefix)
+                option(value='Shri') Shri 
+                option(value='Smt') Smt
+                option(value='.km') .Km
+            input#nameOftheDeceased.form-input.form-input--modifier(type='text', placeholder='................................................................',required)
+            select.mx-2#relation.form--select(relation)
+                option(value='son of') Son Of 
+                option(value='wife of') Wife Of
+                option(value='daughter of') Daughter Of
             br
-            span ward no
-            input#wardNo.form-input.form-input--modifier.font-weight-bold(type='number', placeholder=' ...............................................', required)
-            span on 
-            input#deathDate.form-input.form-input--modifier(type="text", placeholder='................................................................'  onfocus="(this.type='date')", required )
+            input#relationName.form-input.form-input--modifier(type='text', placeholder='................................................................',required)
                    
-            span at
-            input#deathTime.form-input.form-input--modifier.font-weight-bold(type='text', placeholder=' ...............................................', required )
+            span resident of
+            input#residentLoction.form-input.form-input--modifier(type='text', placeholder='................................................................',required)
+            span was under my treatment from
+            input#treatmentStartOn.form-input.form-input--modifier(type="text", placeholder='................................................................'  onfocus="(this.type='date')", required )
+            br
+            span to
+            input#treatmentEndOn.form-input.form-input--modifier(type="text", placeholder='................................................................'  onfocus="(this.type='date')", required )
+            span and
+            select.mx-2#heshe.form--select(heshe)
+                option(value='He') he
+                option(value='She') she 
+            span died on 
+            input#patientDiedOn.form-input.form-input--modifier(type="text", placeholder='................................................................'  onfocus="(this.type='date')", required )
+            span at 
+            input#deathTime.form-input.form-input--modifier(type="text", placeholder='................................................................', required )
+
         .form-group
             table
                 tr  
@@ -127,23 +144,20 @@ block content
                             input#policeInvestigation(type='radio' name='mannerOfDeath' value='pending investigation')
                             label.mr-2(for='PoliceInvestigation' name='mannerOfDeath' value='pendingInvestigation') Police Investigation
                             br
-                            span.ml-4 If deceased was a female, was pregnancy the death associated with?
-                            br
-                            br
                             span-ml-3 If yes, was there a delivery?
-                            input.ml-5#isDeliveryTrue(type='radio' name='isDelivery' value='true')
-                            label.mr-5(for='true' name='isDelivery' value='true') 1.YES
-                            input#isDeliveryFalse(type='radio' name='isDelivery' value='false')
-                            label(for='false' name='isDelivery' value='false') 2.NO
+                            input.ml-5#isPregnentTrue(type='radio' name='isPregnent' value='yes')
+                            label.mr-5(for='yes' name='isPregnent' value='yes') 1.YES
+                            input#isPregnentFalse(type='radio' name='isPregnent' value='no')
+                            label(for='no' name='isPregnent' value='no') 2.NO
 
                         td.mx-auto(colspan='3') 
-                            label.ml-3(for='howInjuryOccured') How did the injury Occured?
+                            label.ml-3(for='howInjury') How did the injury Occured?
                             input#howInjuryOccured.form-input.form-input--modifier(type='text' placeholder='.................')
                             br
-                            input.ml-5#isPregnentTrue(type='radio' name='isPregnent' value='true')
-                            label.mr-5(for='true' name='isPregnent' value='true') 1.YES
-                            input#isPregnentFalse(type='radio' name='isPregnent' value='false')
-                            label(for='false' name='isPregnent' value='false') 2.NO
+                            input.ml-5#isDeliveryTrue(type='radio' name='isDelivery' value='yes')
+                            label.mr-5(for='yes' name='isDelivery' value='yes') 1.YES
+                            input#isDeliveryFalse(type='radio' name='isDelivery' value='no')
+                            label(for='no' name='isPregnent' value='no') 2.NO
         .form-group.text-center
             button.btn.btn-lg.btn-success Submit
     .line
@@ -168,9 +182,18 @@ block content
             br
             span R/O
                 input.form-input--modifier(type='text' placeholder='................................................................')
-            span was admitted to this hospital on
-                input.form-input--modifier(type='text' placeholder='................................................................')
+            span was under my treatment from
+            input#treatmentStartOn.form-input.form-input--modifier(type="text", placeholder='................................................................'  onfocus="(this.type='date')", required )
             br
-            span and has expired on
-                input#deathTime.form-input.form-input--modifier(type="text", placeholder='................................................................'  onfocus="(this.type='date')", required )
+            span to
+            input#treatmentEndOn.form-input.form-input--modifier(type="text", placeholder='................................................................'  onfocus="(this.type='date')", required )
+            span and
+            select.mx-2#heshe.form--select(heshe)
+                option(value='He') he
+                option(value='She') she 
+            span died on 
+            input#patientDiedOn.form-input.form-input--modifier(type="text", placeholder='................................................................'  onfocus="(this.type='date')", required )
+            span at 
+            input#deathTime.form-input.form-input--modifier(type="text", placeholder='................................................................', required )
+
     .line

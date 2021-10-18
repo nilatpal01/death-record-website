@@ -1,60 +1,219 @@
 extends base
 
-mixin overviewBox(label,text,icon)
-    .overview-box__detail 
-        svg.overview-box__icon
-            use(xlink:href=`/img/icons.svg#icon-${icon}`)
-        span.overview-box__label= label
-        span.overview-box__text= text
-
 block content
-    section.section-header 
-        .header__hero 
-            h1.heading-primary
-                span.hero-text= 'Form no. 4' 
-                //br
-                //span.hero-text= '(See Rule no. 7)'
-                //br
-                //span.hero-text= 'Medical Certificate of cause of Death'
-            //p.hero-para='(hospital in patient not to be used for stillbirths)'
-            //p.hero-para='To be sent to Registrar along with Form no.2 (Death Report)'
- 
-    section.section-description 
-        .overview-box 
-            div
-                .overview-box__group
-                    h2.heading-secondary.ma-bt-lg=`Name of the Hospital : ${form.hospitalName}`
-                    h2.heading-secondary.ma-bt-lg=`Name of Deceased : ${form.nameOftheDeceased}`
+    h3.heading.text-center 
+        span.text-uppercase.font-weight-bold FORM NO.4
+        br
+        span.font-weight-bold (See Rule no. 7)
+        br
+        span.text-uppercase.font-weight-bold MEDICAL CERTIFICATE FOR CAUSE OF DEATH
+        br
+        span (hospital in patient not to be used for stillbirths)
+        br
+        span To be sent to Registrar along with Form no.2 (Death Report)
 
-                    +overviewBox('Sex', form.sex , 'user' )
-                    +overviewBox('Age at Death', `${form.age} years` , 'calendar' )
-                
-                .overview-box__group
-                    h2.heading-secondary.ma-bt-lg=`Cause of Death : ${form.causeOfDeath}`
+    form.form
+        .form-group.text-center
+            label.form-label.font-weight-bold(for='hospitalName') Name of the Hospital : 
+            -const hospitalName= form.hospitalName;
+            
+            input.form-input.form-input--modifier.font-weight-bold.font-italic.form-input-large(type='text', value= hospitalName, readonly)
+        .form-group.text-center
+            span I hereby certify that the person whose particulars are given below died in the hospital in 
+            br
+            span ward no
+            -const wardNo=form.wardNo;
+            input.form-input.form-input--modifier.font-weight-bold.text-center.font-italic(type='number',  value=wardNo, readonly)
+            span on 
+            -const date=new Date(form.deathDate).toLocaleDateString();
+            -console.log(date);
+            input#deathDate.form-input.form-input--modifier.text-center.font-italic.font-weight-bold(value=date, readonly)
+                   
+            span at
+            -const deathTime=form.deathTime;
+            input#deathTime.form-input.form-input--modifier.font-weight-bold.text-center.font-italic(type='text', value=deathTime, readonly)
+        .form-group
+            table
+                tr  
+                    td(colspan=5)
+                        div
+                            label.form-label.font-weight-bold.text-uppercase(for='name') Name of the Deceased 
+                            -const name=form.nameOftheDeceased;
+                            input#nameOftheDeceased.form-input.form-input--modifier.font-weight-bold.font-italic.text-center(type='text',value=name,readonly)
+                    td(rowspan=3)
+                        div
+                            span.text-center For Use of statistical office
+                tr 
+                    td.text-center(rowspan=2) sex 
+                    td.text-center(colspan=4) age at death
+                tr
+                    td
+                        //- input#typeYear(type='radio' name='ageType' value='years')
+                        span.text-center If one year or more age in years
+                    td
+                        //- input#typeMonth(type='radio' name='ageType' value='months')
+                        span If less then one year age in months
+                    td
+                        //- input#typeDay(type='radio' name='ageType' value='days')
+                        span If less then one month age in days
+                    td 
+                        //- input#typeHour(type='radio' name='ageType' value='hour')
+                        span If less then one day age in hours
 
-                    +overviewBox('Immediate Cause', `${form.immediateCause} due to (or as consiquences of)`, 'tag')
-                    if typeof  form.antecedentCause1!=='undefined' 
-                        +overviewBox('Antecedent Cause', `${form.antecedentCause1} due to (or as consiquences of)`, 'tag' )
-                    if typeof  form.otherSignificantCause!=='undefined'
-                        +overviewBox('Other Significant Cause', `${form.otherSignificantCause} due to (or as consiquences of)`, 'tag' )
-                    +overviewBox('Interval between onset & death (approx)', `${form.betweenOnsetAndDeath}`, 'clock' )
-        
-        .description-box
-            h2.heading-secondary.ma-bt-lg='How did the injury Occured?'
-            if typeof  form.howInjuryOccured!=='undefined' 
-                +overviewBox('Reason', `${form.howInjuryOccured}`, 'activity')
-            +overviewBox('Manner of Death', `${form.mannerOfDeath}`, 'star')
-            h3.heading-tertirary.ma-bt-lg.heading-female='If deceased was a female, was pregnency the death associated with it ?'
-            -if(form.isFemale === true) 
-                +overviewBox('Pregnent', 'YES', 'activity')  
-            -if(form.isFemale === false)            
-                +overviewBox('Pregnent', 'NO', 'activity')
-            h3.heading-tertirary.ma-bt-lg.heading-female='If yes, was there a delivery?'
-            -if(form.isDelivery === true) 
-                +overviewBox('Delivery', 'YES', 'activity')  
-            -if(form.isDelivery === false)            
-                +overviewBox('Delivery', 'NO', 'activity')
+                tr
+                    td.ml-2
+                        -var sex=form.sex;
+                        input#sex.form-input.form-input--modifier.font-weight-bold.text-center.font-italic(type='text', value=sex, readonly)
+                            
+                    td(colspan='4')
+                        -const age=form.fullAge;
+                        input#age.form-input.form-input--modifier.font-weight-bold.text-center.font-italic(type='text', value=age, readonly)
+                    td
 
-    section.section--end 
-        a.btn.btn--green.btn--small.btn--end.btn--accept(href='#') Accept
-        a.btn.btn--green.btn--small.btn--end.btn--reject(href='#') Reject
+                    tr
+
+                        td(colspan='3')
+                            .row 
+                                .col-sm-7 
+                                    br
+                                    h5.text-center.font-weight-bold.text-uppercase Cause of Death
+                                    br
+                                    span.immediate-cause.ml-2 I. Immediate Cause
+                                    p.form-paragraph State the disease, injury or complication which Caused death, not the mode of dying such as Hear failure, asthenia, etc.
+                                    span.antacedent-cause.ml-2 II. Antacedent Cause 
+                                    p.form-paragraph Morbid conditions, if any, giving rise to the above Cause, stating underlying conditions last
+                                    span.other-cause.ml-2 Other Significant Cause 
+                                    p.form-paragraph Other Significant conditions contributing to the Death but not related to the diseases or conditions causing it.
+                        td
+                            .pad
+                                span (a)
+                                -const immediateCause=form.immediateCause;
+                                input#immediateCause.form-input.font-weight-bold.text-center.font-italic(type='text',value=immediateCause,readonly)
+                                br
+                                span due to (or as consiquence of) 
+                            .pad
+                                span (b)
+                                if typeof  form.antecedentCause!=='undefined'
+                                    -var antecendentCause=form.antecedentCause; 
+                                    input#antecedentCause.form-input.font-weight-bold.text-center.font-italic(type='text' value=antacedentCause,readonly)
+                                else
+                                    input#antecedentCause.form-input.font-weight-bold.text-center.font-italic(type='text' placeholder='.............')
+                                br
+                                span due to (or as consiquence of) 
+                            .pad
+                                span (c)
+                                -console.log(form.otherSignificantCause!=='undefined')
+                                if typeof  form.otherSignificantCause!=='undefined'
+                                    -var otherSignificantCause=form.otherSignificantCause; 
+                                    input#otherSignificantCausee.form-input.font-weight-bold.text-center.font-italic(type='text' value=otherSignificantCause,readonly)
+                                else
+                                    input#otherSignificantCause.form-input.font-weight-bold.text-center.font-italic(type='text' placeholder='.............',readonly)
+                                br
+                                span due to (or as consiquence of) 
+                        td.mx-auto
+                            label.form-label(for='intervalBetweenOnsetDeath') 
+                                span Interval Between 
+                                br
+                                span Onset & death
+                                br
+                                span Approx.
+                            -const interval=form.intervalOnsetDeath;
+                            input#intervalOnsetDeath.form-input.font-weight-bold.text-center.font-italic(type='text', value=interval,readonly)
+                        td
+                    tr 
+                        td.ml-5(colspan='3')
+                            span
+                                u Manner of Death
+                            br
+                            if form.mannerOfDeath=='natural'
+                                input#natural(type='radio' name='mannerOfDeath' value='natural',checked,readonly)
+                                label.mr-2(for='natural' value='natural') Natural
+                                input#accident(type='radio' name='mannerOfDeath' value='accident',readonly)
+                                label.mr-2(for='accident' name='mannerOfDeath' value='accident') Accident
+                                input#suicide(type='radio' name='mannerOfDeath' value='suicide',readonly)
+                                label.mr-2(for='suicide' name='mannerOfDeath' value='suicide') Suicide 
+                                input#homicide(type='radio' name='mannerOfDeath' value='homicide',readonly)
+                                label.mr-2(for='homicide' name='mannerOfDeath' value='homicide') Homicide
+                                br
+                                input#policeInvestigation(type='radio' name='mannerOfDeath' value='pending investigation',readonly)
+                                label.mr-2(for='PoliceInvestigation' name='mannerOfDeath' value='pendingInvestigation') Police Investigation
+                            if form.mannerOfDeath=='accident'
+                                input#natural(type='radio' name='mannerOfDeath' value='natural')
+                                label.mr-2(for='natural' value='natural') Natural
+                                input#accident(type='radio' name='mannerOfDeath' value='accident',checked)
+                                label.mr-2(for='accident' name='mannerOfDeath' value='accident') Accident
+                                input#suicide(type='radio' name='mannerOfDeath' value='suicide')
+                                label.mr-2(for='suicide' name='mannerOfDeath' value='suicide') Suicide 
+                                input#homicide(type='radio' name='mannerOfDeath' value='homicide')
+                                label.mr-2(for='homicide' name='mannerOfDeath' value='homicide') Homicide
+                                br
+                                input#policeInvestigation(type='radio' name='mannerOfDeath' value='pending investigation')
+                                label.mr-2(for='PoliceInvestigation' name='mannerOfDeath' value='pendingInvestigation') Police Investigation
+                            if form.mannerOfDeath=='suicide'
+                                input#natural(type='radio' name='mannerOfDeath' value='natural')
+                                label.mr-2(for='natural' value='natural') Natural
+                                input#accident(type='radio' name='mannerOfDeath' value='accident')
+                                label.mr-2(for='accident' name='mannerOfDeath' value='accident') Accident
+                                input#suicide(type='radio' name='mannerOfDeath' value='suicide',checked)
+                                label.mr-2(for='suicide' name='mannerOfDeath' value='suicide') Suicide 
+                                input#homicide(type='radio' name='mannerOfDeath' value='homicide')
+                                label.mr-2(for='homicide' name='mannerOfDeath' value='homicide') Homicide
+                                br
+                                input#policeInvestigation(type='radio' name='mannerOfDeath' value='pending investigation')
+                                label.mr-2(for='PoliceInvestigation' name='mannerOfDeath' value='pendingInvestigation') Police Investigation
+
+                            if form.mannerOfDeath=='homicide'
+                                input#natural(type='radio' name='mannerOfDeath' value='natural')
+                                label.mr-2(for='natural' value='natural') Natural
+                                input#accident(type='radio' name='mannerOfDeath' value='accident')
+                                label.mr-2(for='accident' name='mannerOfDeath' value='accident') Accident
+                                input#suicide(type='radio' name='mannerOfDeath' value='suicide')
+                                label.mr-2(for='suicide' name='mannerOfDeath' value='suicide') Suicide 
+                                input#homicide(type='radio' name='mannerOfDeath' value='homicide',checked)
+                                label.mr-2(for='homicide' name='mannerOfDeath' value='homicide') Homicide
+                                br
+                                input#policeInvestigation(type='radio' name='mannerOfDeath' value='pending investigation')
+                                label.mr-2(for='PoliceInvestigation' name='mannerOfDeath' value='pendingInvestigation') Police Investigation
+
+                            if form.mannerOfDeath=='pending investigation'
+                                input#natural(type='radio' name='mannerOfDeath' value='natural')
+                                label.mr-2(for='natural' value='natural') Natural
+                                input#accident(type='radio' name='mannerOfDeath' value='accident')
+                                label.mr-2(for='accident' name='mannerOfDeath' value='accident') Accident
+                                input#suicide(type='radio' name='mannerOfDeath' value='suicide')
+                                label.mr-2(for='suicide' name='mannerOfDeath' value='suicide') Suicide 
+                                input#homicide(type='radio' name='mannerOfDeath' value='homicide')
+                                label.mr-2(for='homicide' name='mannerOfDeath' value='homicide') Homicide
+                                br
+                                input#policeInvestigation(type='radio' name='mannerOfDeath' value='pending investigation',checked)
+                                label.mr-2(for='PoliceInvestigation' name='mannerOfDeath' value='pendingInvestigation') Police Investigation
+                            br
+                            if form.isDelivery==true
+                                input.ml-5#isDeliveryTrue(type='radio' name='isDelivery' value='true',checked)
+                                label.mr-5(for='true' name='isDelivery' value='true') 1.YES
+                                input#isDeliveryFalse(type='radio' name='isDelivery' value='false')
+                                label(for='false' name='isDelivery' value='false') 2.NO
+                            else
+                                input.ml-5#isDeliveryTrue(type='radio' name='isDelivery' value='true')
+                                label.mr-5(for='true' name='isDelivery' value='true') 1.YES
+                                input#isDeliveryFalse(type='radio' name='isDelivery' value='false',checked)
+                                label(for='false' name='isDelivery' value='false') 2.NO
+
+                        td.mx-auto(colspan='3') 
+                            label.ml-3(for='howInjuryOccured') How did the injury Occured?
+                            -const howInjury=form.howInjuryOccured;
+                            input#howInjuryOccured.form-input.form-input--modifier.font-weight-bold.font-italic(type='text',value=howInjury,readonly)
+                            br
+                            if isPregnent==true
+                                input.ml-5#isPregnentTrue(type='radio' name='isPregnent' value='true',checked)
+                                label.mr-5(for='true' name='isPregnent' value='true') 1.YES
+                                input#isPregnentFalse(type='radio' name='isPregnent' value='false')
+                                label(for='false' name='isPregnent' value='false') 2.NO
+                            else
+                                input.ml-5#isPregnentTrue(type='radio' name='isPregnent' value='true')
+                                label.mr-5(for='true' name='isPregnent' value='true') 1.YES
+                                input#isPregnentFalse(type='radio' name='isPregnent' value='false',checked)
+                                label(for='false' name='isPregnent' value='false') 2.NO 
+        section.section--end.text-center
+            a.btn.btn-success.btn-lg.btn--accept(href='#') Accept
+            a.btn.btn-warning.btn-lg.btn--reject(href='#') Reject

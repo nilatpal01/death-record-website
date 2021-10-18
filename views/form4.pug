@@ -22,67 +22,26 @@ block content
                         h4.heading-list Age
                         br
                         span.list-info=`${form.age} Years`
-                li.list-inline-item.list-inline-item-modifier
-                        h4.heading-list Cause
-                        br
-                        span.list-info=form.causeOfDeath.toUpperCase()
                 if form.isVerified===true 
                     li.list-inline-item.list-inline-item-modifier
-                        h4.heading-list Status 1
+                        h4.heading-list Verification Status
                         br
-                        h4.badge.badge-success Verified !
+                        h4.badge.badge-success.even-larger-badge Verified !
                 else
                     li.list-inline-item.list-inline-item-modifier
-                        h4.heading-list Status 1
+                        h4.heading-list  Verification Status
                         br
-                        h4.badge.badge-danger Not Verified !
+                        h4.badge.badge-danger.even-larger-badge Not Verified !
 
                 if form.isApproved===true 
                     li.list-inline-item.list-inline-item-modifier
-                        h4.heading-list Status 2
+                        h4.heading-list Approval Status
                         br
-                        h4.badge.badge-success Approved !
+                        h4.badge.badge-success.even-larger-badge Approved !
                 else
                     li.list-inline-item.list-inline-item-modifier
-                        h4.heading-list Status 2
+                        h4.heading-list Approval Status
                         br
-                        h4.badge.badge-danger Not Approved ! 
+                        h4.badge.badge-danger.even-larger-badge Not Approved ! 
                 li.list-inline-item.list-inline-item-modifier.float-right
-                    a.btn.btn-modifier.btn-success(href=`form4/${form._id}`) View Full Form   
-                    
-                
-
-
-
-
-
-                //- .card 
-                //-     .card__header 
-                //-         .card__picture
-                //-             .card__picture-overlay &nbsp;
-                //-             img.card__picture-img(src='img/form-bg.jpg' alt='form-bg')
-                //-         h3.heading-tertirary
-                //-             span=form.nameOftheDeceased
-                //-     .card__details 
-                //-         h4.card__sub-heading=form.hospitalName
-                //-         .card__data 
-                //-             svg.card__icon 
-                //-                 use(xlink:href='img/icons.svg#icon-watch')
-                //-             span=form.deathTime
-                //-         .card__data 
-                //-             svg.card__icon 
-                //-                 use(xlink:href='img/icons.svg#icon-info')
-                //-             span=form.mannerOfDeath
-                //-         .card__data 
-                //-             svg.card__icon 
-                //-                 use(xlink:href='img/icons.svg#icon-tag')
-                //-             span=form.causeOfDeath.toUpperCase()
-                //-     .card__footer
-                //-         p
-                //-             svg.card__icon 
-                //-                 use(xlink:href='img/icons.svg#icon-user')
-                //-                 |  
-                //-             span.card__footer-value= ` ${form.age} YEARS `
-                //-                 |  
-                //-             span.card__footer-text= form.sex.toUpperCase()
-                //-         a.btn.btn--green.btn--small(href=`form4/${form._id}`) Details              
+                    a.btn.btn-modifier.btn-success.btn-lg(href=`form4/${form._id}`) View Full Form  

@@ -1,3 +1,27 @@
+.alert {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 9999;
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 400;
+  text-align: center;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 1.6rem 15rem;
+  -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+}
+.alert--success {
+  background-color: #20bf6b;
+}
+.alert--error {
+  background-color: #eb4d4b;
+}
+
 .nav__el,
 .nav__el:link,
 .nav__el:visited {
@@ -55,6 +79,10 @@ table, th, td {
   margin-left:65px;
 }
 
+.form-input-large{
+  width:25%;
+}
+
 .certificate{
   display: flex;
   justify-content: center;
@@ -86,12 +114,11 @@ table, th, td {
 .heading-list  {
   font-size:1.25rem;
   text-align: center;
-  background-color: #06070E;
-  padding:5px;
-  border-radius: 50px; 
-  color: #fff;
+  padding:4px;
+  background-color: #152D35;
+  color: rgb(255, 233, 233);
   margin-bottom: 0px !important;
-  font-weight:700;
+  font-weight:500;
 }
 
 .nav-logo{
@@ -100,8 +127,8 @@ table, th, td {
   }
 
   .nav__user-img {
-    height: 1.50rem;
-    width: 1.50rem;
+    height: 2rem;
+    width: 2rem;
     border-radius: 15%;
   }
 
@@ -125,6 +152,10 @@ table, th, td {
       margin: 10px;
   }
 
+  .badge.even-larger-badge{
+    font-size:1rem;
+  }
+
     /*****************************login****************************/
 
     .login-form{
@@ -145,31 +176,32 @@ table, th, td {
   /*********************************************LISTS***************************************************/
 
   .list-inline-item-modifier{
-    padding:5px 10px;
+    border:1px solid #333;
   }
 
+
   .list-inline-modifier{
-    background:#505E7C;
+    background:#779FA1;
     border:1px solid #152D35;
     text-align: center;
-    padding:10px;
- 
+    padding:5px;
+    border:2px solid #333;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    transition: all 0.2s ease-in-out !important; 
+    margin-bottom: 5px !important;
+  }
+
+  .list-inline-modifier:hover{
+    background:#435F60;
+    transform: scale(1.1) !important;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   }
 
   .list-info{
     color: #fff;
-    padding:5px;
-    border-radius: 50px;
-    font-weight:700;
+    font-weight:500;
     width:15%;
-    /* text-align: center; */
   }
-
-  .btn-modifier{
-    vertical-align: bottom !important;
-  }
-
-
 
   /*********************************************FOOTER***************************************************/
 

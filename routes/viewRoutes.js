@@ -6,6 +6,8 @@ const router=express.Router();
 
 router.get('/',authController.isLoggedIn,viewController.getOverview);
 router.get('/form4',authController.protect,viewController.getForm4);
+router.get('/verified-form4',authController.protect,viewController.getVerifiedForm4);
+router.get('/verified-form4a',authController.protect,viewController.getVerifiedForm4a);
 router.get('/form4/:id',authController.isLoggedIn,viewController.getOneForm4);
 router.get('/form4a',authController.isLoggedIn,viewController.getForm4a);
 router.get('/form4a/:id',authController.isLoggedIn,viewController.getOneForm4a);
@@ -15,6 +17,7 @@ router.get('/me', authController.protect,viewController.getAccount);
 
 router.get('/userOverview',authController.isLoggedIn,viewController.getUserOverview);
 router.get('/admin-overview',authController.isLoggedIn,viewController.getAdminOverview);
+router.get('/approver-overview',authController.isLoggedIn,viewController.getApproverOverview);
 
 router.post('/submit-user-data', authController.protect,viewController.updateUserData);
 

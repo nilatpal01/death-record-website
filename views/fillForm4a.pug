@@ -28,7 +28,7 @@ block content
             input#relationName.form-input.form-input--modifier(type='text', placeholder='................................................................',required)
                    
             span resident of
-            input#residentLoction.form-input.form-input--modifier(type='text', placeholder='................................................................',required)
+            input#residentLocation.form-input.form-input--modifier(type='text', placeholder='................................................................',required)
             span was under my treatment from
             input#treatmentStartOn.form-input.form-input--modifier(type="text", placeholder='................................................................'  onfocus="(this.type='date')", required )
             br
@@ -51,8 +51,8 @@ block content
                             label.form-label.font-weight-bold.text-uppercase(for='hospitalName') Name of the Deceased 
                             input#nameOftheDeceased.form-input.form-input--modifier(type='text',required)
                     td(rowspan=3)
-                        div
-                            span.text-center For Use of statistical office
+                        div.ml-1.text-center
+                            span For Use of statistical office
                 tr 
                     td.text-center(rowspan=2) sex 
                     td.text-center(colspan=4) age at death
@@ -79,13 +79,13 @@ block content
                         label(for='female' name='sex' value='female') 2.Female 
                             
                     td 
-                        input#ageYear.form-input(type='number' placeholder='age in years')
+                        input#ageYear.form-input.mx-auto.form-input--modifier(type='number' placeholder='IF AGE IS IN YEARS')
                     td
-                        input#ageMonth.form-input(type='number' placeholder='age in months')
+                        input#ageMonth.form-input.mx-auto.form-input--modifier(type='number' placeholder='IF AGE IS IN MONTHS')
                     td
-                        input#ageDay.form-input(type='number' placeholder='age in days')
+                        input#ageDay.form-input.mx-auto.form-input--modifier(type='number' placeholder='IF AGE IS IN DAYS')
                     td
-                        input#ageHour.form-input(type='number' placeholder='age in hours')
+                        input#ageHour.form-input.mx-auto.form-input--modifier(type='number' placeholder='IF AGE IS IN HOURS')
                     td
 
                     tr
@@ -105,7 +105,22 @@ block content
                         td
                             .pad
                                 span (a)
-                                input#immediateCause(type='text' placeholder='.....................')
+                                br
+                                select#immediateCause.form-label.font-weight-bold(name='immediateCause' placeholder='.....................')
+                                    option(value="null") Select desease here....
+                                    option(value="A00.0 Cholera due to Vibrio cholerae 01, biovar cholerae") biovar cholerae
+                                    option(value='A00.1 Cholera due to Vibrio cholerae 01, biovar eltor') biovar eltor
+                                    option(value="A00.9 Cholera, unspecified ") Cholera
+                                    option(value="A01.0 Typhoid fever") Typhoid fever
+                                    option(value="A01.1 Paratyphoid fever A") Paratyphoid fever A
+                                    option(value="A01.2 Paratyphoid fever B") Paratyphoid fever B
+                                    option(value="A01.3 Paratyphoid fever C") Paratyphoid fever C
+                                    option(value="A01.4 Paratyphoid fever, unspecified") Paratyphoid fever
+                                    option(value="A02.0 Salmonella enteritis") Salmonella enteritis
+                                    option(value="A02.1 Salmonella sepsis") Salmonella sepsis
+                                    option(value="A02.2 Localized salmonella infections") Localized salmonella infections
+                                    option(value="A02.8 Other specified salmonella infections") Other specified salmonella infections
+                                    option(value="A02.9 Salmonella infection, unspecified") Salmonella infection, unspecified
                                 br
                                 span due to (or as consiquence of) 
                             .pad
@@ -118,7 +133,7 @@ block content
                                 input#otherSignificantCause(type='text' placeholder='.....................')
                                 br
                                 span due to (or as consiquence of) 
-                        td.mx-auto
+                        td.ml-2.text-center
                             label.form-label(for='intervalBetweenOnsetDeath') 
                                 span Interval Between 
                                 br
@@ -144,7 +159,7 @@ block content
                             input#policeInvestigation(type='radio' name='mannerOfDeath' value='pending investigation')
                             label.mr-2(for='PoliceInvestigation' name='mannerOfDeath' value='pendingInvestigation') Police Investigation
                             br
-                            span-ml-3 If yes, was there a delivery?
+                            span.ml-4 If deceased was a female, was pregnancy the death associated with?
                             input.ml-5#isPregnentTrue(type='radio' name='isPregnent' value='yes')
                             label.mr-5(for='yes' name='isPregnent' value='yes') 1.YES
                             input#isPregnentFalse(type='radio' name='isPregnent' value='no')
@@ -152,8 +167,10 @@ block content
 
                         td.mx-auto(colspan='3') 
                             label.ml-3(for='howInjury') How did the injury Occured?
-                            input#howInjuryOccured.form-input.form-input--modifier(type='text' placeholder='.................')
+                            input#howInjuryOccured.form-input.form-input--modifier.input-textarea(type='text' minlength="10" maxlength="45")
                             br
+                            br
+                            span-ml-3 If yes, was there a delivery?
                             input.ml-5#isDeliveryTrue(type='radio' name='isDelivery' value='yes')
                             label.mr-5(for='yes' name='isDelivery' value='yes') 1.YES
                             input#isDeliveryFalse(type='radio' name='isDelivery' value='no')

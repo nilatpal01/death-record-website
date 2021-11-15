@@ -46,13 +46,13 @@ block content
                 tr 
                     td.text-center(rowspan=2) sex 
                     td.text-center(colspan=4) age at death
-                tr
+                tr.text-center
                     td
                         //- input#typeYear(type='radio' name='ageType' value='years')
-                        span.text-center If one year or more age in years
+                        span If one year or more age in years
                     td
                         //- input#typeMonth(type='radio' name='ageType' value='months')
-                        span If less then one year age in months
+                        spanIf less then one year age in months
                     td
                         //- input#typeDay(type='radio' name='ageType' value='days')
                         span If less then one month age in days
@@ -95,9 +95,9 @@ block content
                                 span (b)
                                 if typeof  form.antecedentCause!=='undefined'
                                     -var antecendentCause=form.antecedentCause; 
-                                    input#antecedentCause.form-input.font-weight-bold.text-center.font-italic(type='text' value=antacedentCause,readonly)
+                                    input#antecedentCause.form-input.font-weight-bold.text-center.font-italic(type='text' value=antecendentCause,readonly)
                                 else
-                                    input#antecedentCause.form-input.font-weight-bold.text-center.font-italic(type='text' placeholder='.............')
+                                    input#antecedentCause.form-input.font-weight-bold.text-center.font-italic(type='text' value='.............',readonly)
                                 br
                                 span due to (or as consiquence of) 
                             .pad
@@ -107,7 +107,7 @@ block content
                                     -var otherSignificantCause=form.otherSignificantCause; 
                                     input#otherSignificantCausee.form-input.font-weight-bold.text-center.font-italic(type='text' value=otherSignificantCause,readonly)
                                 else
-                                    input#otherSignificantCause.form-input.font-weight-bold.text-center.font-italic(type='text' placeholder='.............',readonly)
+                                    input#otherSignificantCause.form-input.font-weight-bold.text-center.font-italic(type='text' value='.............',readonly)
                                 br
                                 span due to (or as consiquence of) 
                         td.mx-auto
@@ -202,7 +202,7 @@ block content
                         td.mx-auto(colspan='3') 
                             label.ml-3(for='howInjuryOccured') How did the injury Occured?
                             -const howInjury=form.howInjuryOccured;
-                            input#howInjuryOccured.form-input.form-input--modifier.font-weight-bold.font-italic(type='text',value=howInjury,readonly)
+                            input#howInjuryOccured.form-input.form-input--modifier.input-textarea.font-weight-bold.font-italic(type='text',value=howInjury,readonly)
                             br
                             if isPregnent==true
                                 input.ml-5#isPregnentTrue(type='radio' name='isPregnent' value='true',checked)
@@ -215,5 +215,9 @@ block content
                                 input#isPregnentFalse(type='radio' name='isPregnent' value='false',checked)
                                 label(for='false' name='isPregnent' value='false') 2.NO 
         section.section--end.text-center
-            a.btn.btn-success.btn-lg.btn--accept(href='#') Accept
-            a.btn.btn-warning.btn-lg.btn--reject(href='#') Reject
+                if form.isVerified==true
+                    a.btn.btn-success.btn-lg.btn--approve(href='#') Approve
+                    a.btn.btn-warning.btn-lg.btn--reject(href='#') Reject
+                else
+                    a.btn.btn-success.btn-lg.btn--accept(href='#') Verify
+                    a.btn.btn-warning.btn-lg.btn--reject(href='#') Reject

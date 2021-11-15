@@ -41,6 +41,8 @@ const Form4aSchema=new mongoose.Schema({
         type:String,
         required:[true,'Immediate Cause is a required field']
     },
+    deseaseCode:String,
+    deseaseName:String,
     antecedentCause:String,
     otherSignificantCause:String,
     mannerOfDeath:{
@@ -51,7 +53,11 @@ const Form4aSchema=new mongoose.Schema({
         }
     },
     intervalOnsetDeath:String,
-    howInjuryOccured:String,
+    howInjuryOccured:{
+        type:String,
+        minLength:[10, 'length should be between 10words to 45 words'],
+        maxLength:[45, 'length should be between 10words to 45 words'],
+    },
     createdAt: {
         type: Date,
         default: Date.now(),
@@ -60,9 +66,21 @@ const Form4aSchema=new mongoose.Schema({
 
     isPregnent:Boolean,
     isDelivery:Boolean,
-    isVerified:Boolean,
-    isApproved:Boolean
+    isVerified:{
+        type:Boolean,
+        default:false,
+    },
+    isApproved:{
+        type:Boolean,
+        default:false,
+    },
+    rejectReason:String,
+    formNo:{
+        type:String,
+        unique:true
+    },
 },
+
 {
     toJSON:{virtuals:true},
     toObject:{virtuals:true}
@@ -73,6 +91,25 @@ Form4aSchema.pre('save', function(next){
     this.fullName=this.namePrefix+" "+this.nameOftheDeceased;
     next();
  })
+
+ Form4aSchema.pre('save',function(next){
+    const val=this.immediateCause.split(" ");
+    this.deseaseCode=val[0];
+    this.deseaseName=val[1];
+    next();
+});
+
+Form4aSchema.pre('save',function(next){
+    let val=this.createdAt.toLocaleString();
+    val=val.split(',');
+    val=val[0];
+    val=val.split('/').join('');
+    id=this._id.toString();
+    const last=id.substr(id.length - 4);
+    this.formNo=`${val}-${last}`;
+    console.log(this.formNo);
+    next();
+})
 /*
 
 form4ASchema.virtual('betweenOnsetAndDeath').get(function (){

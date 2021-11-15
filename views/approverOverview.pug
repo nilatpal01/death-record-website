@@ -1,0 +1,16 @@
+extends base
+
+block content
+    main.main
+        .jumbotron.jumbotron-modifier.text-center
+            .jumbo-text
+                h1.heading-primary
+                    span WELCOME
+                    br
+                    span=`${user.name}`.toUpperCase()
+                    br
+                    span PLEASE CHOOSE TYPE OF FORM FOR APPROVAL
+                    br
+            .jumbo-btn
+                a.btn.btn-light.btn-outline-primary.btn-lg(href='/verified-form4') FORM 4
+                a.btn.btn-light.btn-outline-primary.btn-lg(href='/verified-form4a') FORM 4A

@@ -3,7 +3,9 @@ import { login, logout, signup } from './login';
 import { createForm4} from './createForm4';
 import { updateSettings} from './updateSettings';
 import { createForm4a } from './createForm4a';
-import { verification4, rejection4, verification4a, rejection4a  } from './verification';
+import { verification4, approver,rejection4, verification4a, rejection4a  } from './verification';
+
+
 
 function isEmpty(val){
   return (val === undefined || val == null || val.length <= 0) ? true : false;
@@ -17,6 +19,7 @@ const updatePasswordForm = document.querySelector('.form-user-password');
 const postForm4 =document.querySelector('.form-create-form4');
 const postForm4a =document.querySelector('.form-create-form4a');
 const accept=document.querySelector('.btn--accept');
+const approve=document.querySelector('.btn--approve');
 const reject=document.querySelector('.btn--reject');
 
 const accept4a=document.querySelector('.btn--accept--4a');
@@ -314,7 +317,19 @@ if(accept){
     const url=window.location.href;
     const id=url.split('/').pop();
     const isVerified=true;
-    verification4(id,isVerified);
+    const rejectReason="form has been corrected";
+    verification4(id,isVerified,rejectReason);
+  })
+}
+
+if(approve){
+  approve.addEventListener('click', (e)=>{
+    e.preventDefault();
+    const url=window.location.href;
+    const id=url.split('/').pop();
+    const isApproved=true;
+    const rejectReason="form has been corrected";
+    approver(id,isApproved,rejectReason);
   })
 }
 
@@ -325,7 +340,8 @@ if(accept4a){
     const url=window.location.href;
     const id=url.split('/').pop();
     const isVerified=true;
-    verification4a(id,isVerified);
+    const rejectReason="form has been corrected";
+    verification4a(id,isVerified,rejectReason);
   })
 }
 
@@ -354,12 +370,18 @@ if(reject){
     },{once:true})
 }
 
-if(reject4a){
   reject4a.addEventListener('click', (e)=>{
     e.preventDefault();
     let markup= `<div>
     <h3>Please give reason for rejection:</h3>
-    <input type='text', id='rejectReason' placeholder='your reason here'>
+    <input type='radio', id='rejectReason1'name='reject reason' value='lorem ipsum 1'>
+    <label for="reason1">lorem ipsum 1</label>
+    <input type='radio', id='rejectReason2'name='reject reason' value='lorem ipsum 2'>
+    <label for="reason2">lorem ipsum 2</label>
+    <input type='radio', id='rejectReason3'name='reject reason' value='lorem ipsum 3'>
+    <label for="reason3">lorem ipsum 3</label><br />
+    <p>If any other reason,please mention it below</p>
+    <input type="text" placeholder="reason for rejection" id="otherReason"><br/>
     <button class="btn btn-danger btn-lg btn--reject--final">Confirm Reject </button>
     </div>
     `
@@ -367,7 +389,20 @@ if(reject4a){
     const rejected = document.querySelector('.btn--reject--final');
       rejected.addEventListener('click', (e)=>{
         e.preventDefault();
-        const reason=document.getElementById('rejectReason').value;
+        let reason;
+        if(document.getElementById('rejectReason1').checked==true){
+          reason=document.getElementById('rejectReason1').value;
+        }
+        else if(document.getElementById('rejectReason2').checked==true){
+          reason=document.getElementById('rejectReason2').value;
+        }
+        else if(document.getElementById('rejectReason3').checked==true){
+            reason=document.getElementById('rejectReason3').value;
+        }
+    
+        else{
+          reason=document.getElementById('otherReason').value;
+        }
         const rejectReason=reason;
         console.log(rejectReason);
          const url=window.location.href;
@@ -377,7 +412,6 @@ if(reject4a){
         rejection4a(id,rejectReason);
       })
     },{once:true})
-}
 
 
 

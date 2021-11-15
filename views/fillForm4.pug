@@ -88,7 +88,22 @@ block content
                         td
                             .pad
                                 span (a)
-                                input#immediateCause(type='text' placeholder='.....................')
+                                br
+                                select#immediateCause.form-label(name='immediateCause' placeholder='.....................')
+                                    option(value="null") Select desease here....
+                                    option(value="A00.0 Cholera due to Vibrio cholerae 01, biovar cholerae") biovar cholerae
+                                    option(value='A00.1 Cholera due to Vibrio cholerae 01, biovar eltor') biovar eltor
+                                    option(value="A00.9 Cholera, unspecified ") Cholera
+                                    option(value="A01.0 Typhoid fever") Typhoid fever
+                                    option(value="A01.1 Paratyphoid fever A") Paratyphoid fever A
+                                    option(value="A01.2 Paratyphoid fever B") Paratyphoid fever B
+                                    option(value="A01.3 Paratyphoid fever C") Paratyphoid fever C
+                                    option(value="A01.4 Paratyphoid fever, unspecified") Paratyphoid fever
+                                    option(value="A02.0 Salmonella enteritis") Salmonella enteritis
+                                    option(value="A02.1 Salmonella sepsis") Salmonella sepsis
+                                    option(value="A02.2 Localized salmonella infections") Localized salmonella infections
+                                    option(value="A02.8 Other specified salmonella infections") Other specified salmonella infections
+                                    option(value="A02.9 Salmonella infection, unspecified") Salmonella infection, unspecified
                                 br
                                 span due to (or as consiquence of) 
                             .pad
@@ -128,9 +143,6 @@ block content
                             label.mr-2(for='PoliceInvestigation' name='mannerOfDeath' value='pendingInvestigation') Police Investigation
                             br
                             span.ml-4 If deceased was a female, was pregnancy the death associated with?
-                            br
-                            br
-                            span-ml-3 If yes, was there a delivery?
                             input.ml-5#isDeliveryTrue(type='radio' name='isDelivery' value='true')
                             label.mr-5(for='true' name='isDelivery' value='true') 1.YES
                             input#isDeliveryFalse(type='radio' name='isDelivery' value='false')
@@ -138,8 +150,9 @@ block content
 
                         td.mx-auto(colspan='3') 
                             label.ml-3(for='howInjuryOccured') How did the injury Occured?
-                            input#howInjuryOccured.form-input.form-input--modifier(type='text' placeholder='.................')
+                            input#howInjuryOccured.form-input.form-input--modifier.input-textarea(type='text' minlength="10" maxlength="45")
                             br
+                            span-ml-3 If yes, was there a delivery?
                             input.ml-5#isPregnentTrue(type='radio' name='isPregnent' value='true')
                             label.mr-5(for='true' name='isPregnent' value='true') 1.YES
                             input#isPregnentFalse(type='radio' name='isPregnent' value='false')

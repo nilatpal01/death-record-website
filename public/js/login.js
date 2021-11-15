@@ -13,20 +13,26 @@ export const login = async (email, password) => {
       },
     });
     console.log(res.data.data.user.role);
-    if(res.data.data.user.role!='admin'){
-      showAlert('success', 'logged in successfully');
-      window.setTimeout(()=>{
-        location.assign('/userOverview')
-      },1500);
-    }
-    else{
-      showAlert('success', 'logged in successfully! you are an admin');
+    if((res.data.data.user.role)=="admin"){
+      showAlert('success', 'logged in successfully! Verifier');
       window.setTimeout(()=>{
         location.assign('/admin-overview')
       },1500);
     }
 
-  } catch (err) {
+    else if((res.data.data.user.role)=="approver"){
+      showAlert('success', 'logged in successfully! Approver');
+      window.setTimeout(()=>{
+        location.assign('/approver-overview')
+      },1500);
+    }
+    else{
+      showAlert('success', 'logged in successfully!');
+      window.setTimeout(()=>{
+        location.assign('/userOverview')
+      },1500);
+  } 
+}catch (err) {
     showAlert('error', err.response.data.message);
   }
 };

@@ -7,7 +7,7 @@ const router=express.Router();
 
 router
     .route('/verified-form4')
-    .get(authController.protect,authController.restrictTo('super-admin'),form4Controller.verifiedFrom4s, form4Controller.getAllForm);
+    .get(authController.protect,authController.restrictTo('approver'),form4Controller.verifiedFrom4s, form4Controller.getAllForm);
 
 router
     .route('/form4-stats')
@@ -19,13 +19,13 @@ router
 
 router
     .route('/')
-    .get(authController.protect,authController.restrictTo('admin'),form4Controller.getAllForm)
+    .get(authController.protect,authController.restrictTo('admin','approver'),form4Controller.getAllForm)
     .post(form4Controller.createForm);
 
 router
     .route('/:id')
-    .get(authController.protect,authController.restrictTo('admin'),form4Controller.getForm)
-    .patch(authController.protect,authController.restrictTo('admin'),form4Controller.updateForm)
-    .delete(authController.protect,authController.restrictTo('admin'),form4Controller.deleteForm);
+    .get(authController.protect,authController.restrictTo('admin', 'approver'),form4Controller.getForm)
+    .patch(authController.protect,authController.restrictTo('admin','approver'),form4Controller.updateForm)
+    .delete(authController.protect,authController.restrictTo('admin','approver'),form4Controller.deleteForm);
 
 module.exports=router;

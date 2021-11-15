@@ -14,7 +14,7 @@ exports.getOverview=(req,res)=>{
 
 exports.getForm4=catchAsync(async(req,res,next)=>{
     //1)get form data from collection
-    const features=new APIFeatures(Form4.find(),req.query).filter().sort().limitFields().pagination();
+    const features=new APIFeatures(Form4.find({isVerified:false}),req.query).filter().sort().limitFields().pagination();
     const forms=await features.query;
     //const forms=await Form4.find();
     //2)build template
@@ -24,6 +24,20 @@ exports.getForm4=catchAsync(async(req,res,next)=>{
         title:'Non verified forms',
         forms
     })
+});
+
+exports.getVerifiedForm4=catchAsync(async(req,res,next)=>{
+  //1)get form data from collection
+  const features=new APIFeatures(Form4.find({isVerified:true,isApproved:false}),req.query).filter().sort().limitFields().pagination();
+  const forms=await features.query;
+  //const forms=await Form4.find();
+  //2)build template
+
+  //3)Render that template using form data from 1
+  res.status(200).render('form4',{
+      title:'verified forms',
+      forms
+  })
 });
 
 exports.getOneForm4=catchAsync(async(req,res,next)=>{
@@ -41,14 +55,26 @@ exports.getOneForm4=catchAsync(async(req,res,next)=>{
 
 exports.getForm4a=catchAsync(async(req,res,next)=>{
      //1)get form data from collection
-    const features=new APIFeatures(Form4A.find(),req.query).filter().sort().limitFields().pagination();
+    const features=new APIFeatures(Form4A.find({isVerified:false}),req.query).filter().sort().limitFields().pagination();
     const forms=await features.query;  //2)build template
  
      //3)Render that template using form data from 1
     res.status(200).render('form4a',{
-        title:'All forms 4a',
+        title:'Non-Verified-Forms',
         forms
     })
+});
+
+exports.getVerifiedForm4a=catchAsync(async(req,res,next)=>{
+  //1)get form data from collection
+ const features=new APIFeatures(Form4A.find({isVerified:true,isApproved:false}),req.query).filter().sort().limitFields().pagination();
+ const forms=await features.query;  //2)build template
+
+  //3)Render that template using form data from 1
+ res.status(200).render('form4a',{
+     title:'Verified-Forms',
+     forms
+ })
 });
 
 exports.getOneForm4a=catchAsync(async(req,res,next)=>{
@@ -110,6 +136,18 @@ exports.getSignupForm = catchAsync(async (req, res) => {
     .render('adminOverview', {
       title: 'welcome',
     });
+});
+
+exports.getApproverOverview=catchAsync(async(req,res)=>{
+  res
+  .status(200)
+  .set(
+    'Content-Security-Policy',
+    "script-src 'self' https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js 'unsafe-inline' 'unsafe-eval';"
+  )
+  .render('approverOverview', {
+    title: 'welcome',
+  });
 });
 
   exports.getAccount=(req,res)=>{

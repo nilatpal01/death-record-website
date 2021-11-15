@@ -7,13 +7,17 @@ block content
         each form in forms
             ul.list-inline.list-inline-modifier
                 li.list-inline-item.list-inline-item-modifier
+                        h4.heading-list Form No.
+                        br
+                        span.list-info=form.formNo
+                li.list-inline-item.list-inline-item-modifier
                         h4.heading-list Name
                         br
                         span.list-info=form.nameOftheDeceased.toUpperCase()
-                //- li.list-inline-item.list-inline-item-modifier
-                //-         h4.heading-list Hospital
-                //-         br
-                //-         span.list-info=form.hospitalName.toUpperCase()
+                li.list-inline-item.list-inline-item-modifier
+                        h4.heading-list Desease
+                        br
+                        span.list-info=form.deseaseName
                 li.list-inline-item.list-inline-item-modifier
                         h4.heading-list Sex
                         br

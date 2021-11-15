@@ -9,7 +9,6 @@ const form4Schema=new mongoose.Schema({
     nameOftheDeceased:{
         type:String,
         required: [true,'Name of the deceased is a required field'],
-        unique:true
     },
     sex:{
         type:String,
@@ -25,10 +24,11 @@ const form4Schema=new mongoose.Schema({
     required:true
     },
     fullAge:String,
-
     deathDate:Date,
     deathTime:String,
     immediateCause:String,
+    deseaseCode:String,
+    deseaseName:String,
     antecedentCause:String,
     otherSignificantCause:String,
     mannerOfDeath:{
@@ -42,7 +42,11 @@ const form4Schema=new mongoose.Schema({
         type:String,
         required:true
     },
-    howInjuryOccured:String,
+    howInjuryOccured:{
+        type:String,
+        minLength:[10, 'length should be between 10words to 45 words'],
+        maxLength:[45, 'length should be between 10words to 45 words'],
+    },
     createdAt: {
         type: Date,
         default: Date.now(),
@@ -51,9 +55,20 @@ const form4Schema=new mongoose.Schema({
 
     isPregnent:Boolean,
     isDelivery:Boolean,
-    isVerified:Boolean,
+    isVerified:{
+        type:Boolean,
+        default:false,
+    },
+    isApproved:{
+        type:Boolean,
+        default:false,
+    },
     rejectReason:String,
-    isApproved:Boolean
+    formNo:{
+        type:String,
+        unique:true
+    },
+    
 },
 {
     toJSON:{virtuals:true},
@@ -64,6 +79,25 @@ const form4Schema=new mongoose.Schema({
 form4Schema.pre('save', function(next){
    this.fullAge = "" + this.age + " " + this.ageType;
    next();
+});
+
+form4Schema.pre('save',function(next){
+    const val=this.immediateCause.split(" ");
+    this.deseaseCode=val[0];
+    this.deseaseName=val[1];
+    next();
+});
+
+form4Schema.pre('save',function(next){
+    let val=this.createdAt.toLocaleString();
+    val=val.split(',');
+    val=val[0];
+    val=val.split('/').join('');
+    id=this._id.toString();
+    const last=id.substr(id.length - 4);
+    this.formNo=`${val}-${last}`;
+    console.log(this.formNo);
+    next();
 })
 // form4Schema.virtual('betweenOnsetAndDeath').get(function (){
 //     const interval=Math.abs(this.deathDate-this.onsetDate);
